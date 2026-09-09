@@ -38,12 +38,20 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure for application. ? HTML pages: login, goals, reading tracker, notifications, shelf, rewards.
+- **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
+- **React** - Provides login, allows users to enter and view goals and rewards, backend endpoint calls. Application with component views and reactive to user's actions.
+- **Service** - Backend service with endpoints for:
+    - retrieving goals
+    - retrieving rewards
+    - creating goals
+    - creating rewards
+    - achieving a goal
+    - earning a reward
+    - entering reading
+    - Register, login, and logout users. Credentials securely stored in database. Can't create goals, track reading, or earn rewards unless authenticated.
+- **DB/Login** - Store authentication information, users, goals, rewards, and reading tracking in database.
+- **WebSocket** - When a user completes a goal, a notification is sent to all other users.
 
 ## 🚀 Specification Deliverable
 
