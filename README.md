@@ -29,9 +29,10 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Set goals in pages, chapters, or books read. Goals can have an optional end date.
+- If a goal has an end date, the app will calculate how much you should read each day to achieve it.
+- Users earn rewards (virtual shelf decorations or user entered real world rewards) for completing goals.
+- When a user completes a goal, other users are notified.
 
 ### Technologies
 
