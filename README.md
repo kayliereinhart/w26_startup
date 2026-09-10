@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A reading tracking app. Users can set goals for pages, chapters, or books read. When they achieve a goal, other users are notified. They also earn rewards, like a book or decoration for their virtual bookshelf.
+A reading tracking app. Users can set goals for pages, chapters, or books read. When they achieve a goal, other users are notified. They also earn personalized rewards.
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -12,7 +12,7 @@ A reading tracking app. Users can set goals for pages, chapters, or books read. 
 
 ### Elevator pitch
 
-Do you want to read more? Page Turners will help you! Set goals and track your reading progress. Use in app or personalized rewards to motivate yourself.
+Do you want to read more? Page Turners will help you! Set goals and track your reading progress. Use personalized rewards to motivate yourself.
 
 ### Design
 
@@ -22,7 +22,7 @@ Do you want to read more? Page Turners will help you! Set goals and track your r
 
 - Set goals in pages, chapters, or books read. Goals can have an optional end date.
 - If a goal has an end date, the app will calculate how much you should read each day to achieve it.
-- Users earn rewards (virtual shelf decorations or user entered real world rewards) for completing goals.
+- Users earn rewards (user entered real world rewards) for completing goals.
 - When a user completes a goal, other users are notified.
 - Users can enter how much they read each day.
 - Goal progress will be shown based on the entered amounts read.
@@ -31,7 +31,7 @@ Do you want to read more? Page Turners will help you! Set goals and track your r
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for application. 6 HTML pages: login, goals, reading tracker, notifications, shelf, rewards.
+- **HTML** - Uses correct HTML structure for application. 5 HTML pages: login, goals, reading tracker, notifications, rewards.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
 - **React** - Provides login, allows users to enter and view goals and rewards, backend endpoint calls. Application with component views and reactive to user's actions.
 - **Service** - Backend service with endpoints for:
@@ -54,12 +54,12 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement)
+- [x] I completed the prerequisites for this deliverable (Git commit requirement)
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ## 🚀 AWS deliverable
 
