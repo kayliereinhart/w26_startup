@@ -1,4 +1,4 @@
-# Booked, Page Turners
+# Page Turners
 
 [My Notes](notes.md)
 
@@ -12,7 +12,7 @@ A reading tracking app. Users can set goals for pages, chapters, or books read. 
 
 ### Elevator pitch
 
-Do you want to read more? This app will help you! Set goals and track your reading progress. Use in app or personalized rewards to motivate yourself.
+Do you want to read more? Page Turners will help you! Set goals and track your reading progress. Use in app or personalized rewards to motivate yourself.
 
 ### Design
 
@@ -40,7 +40,7 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for application. ? HTML pages: login, goals, reading tracker, notifications, shelf, rewards.
+- **HTML** - Uses correct HTML structure for application. 6 HTML pages: login, goals, reading tracker, notifications, shelf, rewards.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
 - **React** - Provides login, allows users to enter and view goals and rewards, backend endpoint calls. Application with component views and reactive to user's actions.
 - **Service** - Backend service with endpoints for:
