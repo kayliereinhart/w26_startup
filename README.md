@@ -33,6 +33,8 @@ sequenceDiagram
 - If a goal has an end date, the app will calculate how much you should read each day to achieve it.
 - Users earn rewards (virtual shelf decorations or user entered real world rewards) for completing goals.
 - When a user completes a goal, other users are notified.
+- Users can enter how much they read each day.
+- Goal progress will be shown based on the entered amounts read.
 
 ### Technologies
 
