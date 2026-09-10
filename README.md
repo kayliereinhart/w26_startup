@@ -54,6 +54,7 @@ I am going to use the required technologies in the following ways.
     - Register, login, and logout users. Credentials securely stored in database. Can't create goals, track reading, or earn rewards unless authenticated.
 - **DB/Login** - Store authentication information, users, goals, rewards, and reading tracking in database.
 - **WebSocket** - When a user completes a goal, a notification is sent to all other users.
+- **3rd Party API** - Used to get book quotes that are displayed on the login page
 
 ## 🚀 Specification Deliverable
 
