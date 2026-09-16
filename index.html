@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Turners | Sign in</title>
+  </head>
+  <body>
+    <header>
+      <h1>Page Turners</h1>
+      <p>Read with purpose. Celebrate every page.</p>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Sign in</a> |
+        <a href="goals.html">Goals</a> |
+        <a href="tracker.html">Reading tracker</a> |
+        <a href="notifications.html">Notifications</a> |
+        <a href="rewards.html">Rewards</a>
+      </nav>
+    </header>
+
+    <main>
+      <section aria-labelledby="welcome-heading">
+        <h2 id="welcome-heading">Turn your next chapter</h2>
+        <img src="placeholder.png" alt="Placeholder for a cozy stack of books illustration" width="320" height="180">
+        <p>Set reading goals, log your progress, and earn rewards that make reading feel even better.</p>
+      </section>
+
+      <section aria-labelledby="login-heading">
+        <h2 id="login-heading">Sign in or create an account</h2>
+        <form>
+          <p>
+            <label for="email">Email</label><br>
+            <input id="email" name="email" type="email" placeholder="reader@example.com" autocomplete="email" required>
+          </p>
+          <p>
+            <label for="password">Password</label><br>
+            <input id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+          </p>
+          <button type="button">Sign in</button>
+          <button type="button">Create account</button>
+        </form>
+        <p><em>Authentication placeholder:</em> account registration, login, and logout will be provided by the backend service.</p>
+      </section>
+
+      <aside aria-labelledby="quote-heading">
+        <h2 id="quote-heading">Today’s reading inspiration</h2>
+        <blockquote>
+          “A reader lives a thousand lives before he dies.”
+        </blockquote>
+        <p>— George R. R. Martin</p>
+        <p><em>Third-party API placeholder:</em> a book-quote service will provide a fresh quote here.</p>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Created by Kaylie Reinhart · <a href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></p>
+    </footer>
+  </body>
+</html>

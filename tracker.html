@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Turners | Reading tracker</title>
+  </head>
+  <body>
+    <header>
+      <h1>Page Turners</h1>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Sign out</a> | <a href="goals.html">Goals</a> | <a href="tracker.html">Reading tracker</a> | <a href="notifications.html">Notifications</a> | <a href="rewards.html">Rewards</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Log today’s reading</h2>
+      <section>
+        <form>
+          <p><label for="reading-goal">Goal</label><br><select id="reading-goal" name="reading-goal"><option>Read The Hobbit</option><option>Read 3 books this month</option></select></p>
+          <p><label for="reading-date">Date</label><br><input id="reading-date" name="reading-date" type="date"></p>
+          <p><label for="reading-amount">Amount read</label><br><input id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25"> <select aria-label="Reading unit"><option>pages</option><option>chapters</option><option>books</option></select></p>
+          <p><label for="reading-notes">Notes (optional)</label><br><textarea id="reading-notes" name="reading-notes" rows="3" placeholder="A favorite passage or thought..."></textarea></p>
+          <button type="button">Add reading</button>
+        </form>
+      </section>
+      <section aria-labelledby="progress-heading">
+        <h3 id="progress-heading">Progress for Read The Hobbit</h3>
+        <p><progress value="120" max="310">120 of 310</progress> 120 of 310 pages</p>
+        <p>You are 38% complete. Read 10 pages each day to finish by May 31.</p>
+        <h3>Recent reading</h3>
+        <ul><li>May 12: 25 pages</li><li>May 11: 18 pages</li><li>May 10: 22 pages</li></ul>
+        <p><em>Database placeholder:</em> daily entries and progress calculations will come from the reading-tracking service.</p>
+      </section>
+    </main>
+    <footer><p>Created by Kaylie Reinhart · <a href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></p></footer>
+  </body>
+</html>

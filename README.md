@@ -73,16 +73,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **HTML pages** - Created five pages: login, goals, reading tracker, notifications, and rewards.
+- [x] **Proper HTML element usage** - Used semantic headers, navigation, main content, sections, forms, tables, articles, and footers.
+- [x] **Links** - Added navigation links between pages and a GitHub repository link in every footer.
+- [x] **Text** - Added instructions, goal data, reading progress, notifications, and reward content.
+- [x] **3rd party API placeholder** - The login page contains a placeholder for a daily book quote API.
+- [x] **Images** - Added a reading-themed image placeholder to the login page.
+- [x] **Login placeholder** - The login page includes sign-in and account-creation form controls.
+- [x] **DB data placeholder** - Goals, reading entries, and rewards include marked database-service placeholders.
+- [x] **WebSocket placeholder** - The notifications page includes a live reader-activity placeholder.
 
 ## 🚀 CSS deliverable
 

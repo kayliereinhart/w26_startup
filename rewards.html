@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Turners | Rewards</title>
+  </head>
+  <body>
+    <header>
+      <h1>Page Turners</h1>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Sign out</a> | <a href="goals.html">Goals</a> | <a href="tracker.html">Reading tracker</a> | <a href="notifications.html">Notifications</a> | <a href="rewards.html">Rewards</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Your reading rewards</h2>
+      <section aria-labelledby="new-reward-heading">
+        <h3 id="new-reward-heading">Add a personal reward</h3>
+        <form>
+          <p><label for="reward-name">Reward</label><br><input id="reward-name" name="reward-name" placeholder="Buy a new bookmark" required></p>
+          <p><label for="reward-goal">Unlock when</label><br><select id="reward-goal" name="reward-goal"><option>Read The Hobbit</option><option>Read 3 books this month</option></select></p>
+          <button type="button">Save reward</button>
+        </form>
+      </section>
+      <section aria-labelledby="reward-list-heading">
+        <h3 id="reward-list-heading">Reward shelf</h3>
+        <article><h4>New bookmark</h4><p>Unlock by completing “Read The Hobbit.”</p><p><strong>Locked</strong> — 190 pages to go.</p></article>
+        <article><h4>Visit my favorite bookstore</h4><p>Unlocked for completing your April reading goal.</p><button type="button">Mark as enjoyed</button></article>
+        <p><em>Database placeholder:</em> your custom rewards and earned status will be stored with your account.</p>
+      </section>
+    </main>
+    <footer><p>Created by Kaylie Reinhart · <a href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></p></footer>
+  </body>
+</html>
