@@ -79,10 +79,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Links** - Added navigation links between pages and a GitHub repository link in every footer.
 - [x] **Text** - Added instructions, goal data, reading progress, notifications, and reward content.
 - [x] **3rd party API placeholder** - The login page contains a placeholder for a daily book quote API.
-- [x] **Images** - Added a reading-themed image placeholder to the login page.
+- [x] **Images** - Added a boo image to the login page.
 - [x] **Login placeholder** - The login page includes sign-in and account-creation form controls.
-- [x] **DB data placeholder** - Goals, reading entries, and rewards include marked database-service placeholders.
-- [x] **WebSocket placeholder** - The notifications page includes a live reader-activity placeholder.
+- [x] **DB data placeholder** - Included goals, reading entries, and rewards placeholders.
+- [x] **WebSocket placeholder** - The notifications page includes goal completion notification placeholders.
 
 ## 🚀 CSS deliverable
 
