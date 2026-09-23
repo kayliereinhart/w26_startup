@@ -18,6 +18,18 @@
     </header>
     <main>
       <h2>Your reading goals</h2>
+      <section aria-labelledby="active-goals-heading">
+        <h3 id="active-goals-heading">Active goals</h3>
+        <table>
+          <caption>Goals loaded from your account</caption>
+          <thead><tr><th scope="col">Goal</th><th scope="col">Progress</th><th scope="col">Finish date</th><th scope="col">Suggested pace</th></tr></thead>
+          <tbody>
+            <tr><td>Read The Hobbit</td><td>120 of 310 pages</td><td>May 31</td><td>10 pages/day</td></tr>
+            <tr><td>Read 3 books this month</td><td>1 of 3 books</td><td>May 31</td><td>2 books/week</td></tr>
+          </tbody>
+        </table>
+      </section>
+
       <section aria-labelledby="new-goal-heading">
         <h3 id="new-goal-heading">Set a new goal</h3>
         <form>
@@ -27,18 +39,6 @@
           <p><label for="goal-date">Optional finish date</label><br><input id="goal-date" name="goal-date" type="date"></p>
           <button type="button">Save goal</button>
         </form>
-      </section>
-      <section aria-labelledby="active-goals-heading">
-        <h3 id="active-goals-heading">Active goals</h3>
-        <table>
-          <caption>Goals loaded from your account</caption>
-          <thead><tr><th scope="col">Goal</th><th scope="col">Progress</th><th scope="col">Finish date</th><th scope="col">Suggested pace</th></tr></thead>
-          <tbody>
-            <tr><td>Read The Hobbit</td><td>120 of 310 pages</td><td>May 31</td><td>10 pages/day</td></tr>
-            <tr><td>Read 3 books this month</td><td>1 of 3 books</td><td>May 31</td><td>2 books remaining</td></tr>
-          </tbody>
-        </table>
-        <p><em>Database placeholder:</em> goals, dates, and calculated daily pace will be retrieved and saved through the service.</p>
       </section>
     </main>
     <footer><p>Created by Kaylie Reinhart · <a href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></p></footer>
