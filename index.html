@@ -23,7 +23,7 @@
       }
 
       .navbar, .footer { background: var(--forest); }
-      .navbar-brand { color: #fff !important; font-family: Georgia, serif; }
+      .navbar-brand { color: #fff !important; }
       .navbar .nav-link { color: rgba(255, 255, 255, .8); }
       .navbar .nav-link:hover, .navbar .nav-link.active { color: #fff; }
       .hero-panel { background: var(--sage); border-radius: 1.5rem; }
@@ -35,12 +35,10 @@
       .login-card { border: 1px solid #e5e4db; border-radius: 1.25rem; }
       .btn-forest { background: var(--forest); border-color: var(--forest); color: white; }
       .btn-forest:hover, .btn-forest:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: white; }
+      .btn-outline-success:hover, .btn-outline-success:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: #fff; }
       .text-forest { color: var(--forest) !important; }
       .form-control:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 
-      @media (min-width: 992px) {
-        .page-content { min-height: calc(100vh - 126px); }
-      }
     </style>
   </head>
   <body class="d-flex flex-column">
@@ -49,7 +47,7 @@
         <div class="container py-2">
           <a class="navbar-brand fw-bold fs-3 d-flex align-items-center gap-2" href="index.html">
             <img src="bookstack.jpg" alt="" class="brand-image rounded" width="72" height="54">
-            <span>Page Turners</span>
+            <h1>Page Turners</h1>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,7 +65,7 @@
       </nav>
     </header>
 
-    <main class="container page-content d-flex align-items-center py-5">
+    <main class="container page-content d-flex flex-grow-1 align-items-center py-5">
       <div class="row g-4 g-xl-5 align-items-stretch w-100 mx-auto">
         <div class="col-lg-6 d-flex flex-column gap-4">
           <section class="hero-panel p-4 p-md-5" aria-labelledby="welcome-heading">
@@ -92,7 +90,6 @@
             <div class="card-body p-4 p-md-5 d-flex flex-column justify-content-center">
               <p class="text-uppercase fw-semibold small text-forest mb-2">Welcome back</p>
               <h2 id="login-heading" class="h2 fw-bold mb-2">Sign in or join us</h2>
-              <p class="text-secondary mb-4">Pick up where your next great reading habit begins.</p>
               <form>
                 <div class="mb-3">
                   <label for="email" class="form-label fw-semibold">Email</label>
@@ -107,7 +104,6 @@
                   <button class="btn btn-outline-success btn-lg" type="button">Create account</button>
                 </div>
               </form>
-              <p class="small text-secondary mt-4 mb-0 text-center">Your next chapter starts with one page.</p>
             </div>
           </section>
         </div>
