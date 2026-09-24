@@ -39,4 +39,31 @@ body {
 .goal-panel { border: 1px solid #e5e4db; border-radius: 1.25rem; }
 .goals-table { --bs-table-bg: transparent; }
 .goals-table thead th { color: var(--forest-dark); }
-.goals-table progress { accent-color: var(--forest); }
+.book-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  width: 157px;
+  max-width: 100%;
+  padding: 0 5px;
+  border-bottom: 5px solid #8b6845;
+}
+.shelf-book {
+  display: block;
+  width: 13px;
+  height: 25px;
+  flex: 0 0 13px;
+  border: 1px solid #c8c4b4;
+  border-radius: 3px 3px 1px 1px;
+  background: #eeece3;
+}
+.shelf-book:nth-child(6n + 1) { background: #a991e5; }
+.shelf-book:nth-child(6n + 2) { background: #90be7c; }
+.shelf-book:nth-child(6n + 3) { background: #d45367; }
+.shelf-book:nth-child(6n + 4) { background: #fecd72; }
+.shelf-book:nth-child(6n + 5) { background: #70b4d7; }
+.shelf-book:nth-child(6n) { background: #ff8c9b; }
+.shelf-book {
+  border-color: rgba(38, 53, 45, .28);
+  box-shadow: inset 3px 0 rgba(255, 255, 255, .22);
+}
