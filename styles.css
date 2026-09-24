@@ -58,12 +58,17 @@ body {
   background: #eeece3;
 }
 .shelf-book:nth-child(6n + 1) { background: #a991e5; }
-.shelf-book:nth-child(6n + 2) { background: #90be7c; }
-.shelf-book:nth-child(6n + 3) { background: #d45367; }
+.shelf-book:nth-child(6n + 2) { background: #90d273; }
+.shelf-book:nth-child(6n + 3) { background: #e44c63; }
 .shelf-book:nth-child(6n + 4) { background: #fecd72; }
 .shelf-book:nth-child(6n + 5) { background: #70b4d7; }
 .shelf-book:nth-child(6n) { background: #ff8c9b; }
 .shelf-book {
   border-color: rgba(38, 53, 45, .28);
-  box-shadow: inset 3px 0 rgba(255, 255, 255, .22);
 }
+.shelf-book:nth-child(6n + 1) { height: 21px; }
+.shelf-book:nth-child(6n + 2) { height: 27px; }
+.shelf-book:nth-child(6n + 3) { height: 23px; }
+.shelf-book:nth-child(6n + 4) { height: 30px; }
+.shelf-book:nth-child(6n + 5) { height: 25px; }
+.shelf-book:nth-child(6n) { height: 28px; }
