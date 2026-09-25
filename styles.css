@@ -26,6 +26,7 @@ body {
 .quote-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
 .celebrations-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
 .celebrations-card .text-uppercase { color: var(--sage); }
+.celebrations-description { color: #e2e8dd; }
 .quote-card .quote-heading { color: #f8f7f2; }
 .quote-card .quote-attribution { color: #e2e8dd; }
 .quote-accent { border-color: var(--sage) !important; }
