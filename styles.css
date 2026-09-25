@@ -37,6 +37,18 @@ body {
 .form-control:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 .form-select:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 
+@media (min-width: 992px) {
+  .tracker-page { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+  .tracker-intro { margin-bottom: 1rem !important; }
+  .tracker-layout { --bs-gutter-y: 1rem; }
+  .tracker-page .login-card .card-body,
+  .tracker-page .hero-panel .card-body { padding: 1.5rem !important; }
+  .tracker-page .login-card h2 { margin-bottom: 1rem !important; }
+  .tracker-page .login-card form > div { margin-bottom: .75rem !important; }
+  .tracker-page .login-card form > div:nth-last-child(2) { margin-bottom: 1rem !important; }
+  .tracker-page .col-lg-5 { gap: 1rem !important; }
+}
+
 .goal-panel { border: 1px solid #e5e4db; border-radius: 1.25rem; }
 .goals-table { --bs-table-bg: transparent; }
 .book-shelf {
