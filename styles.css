@@ -38,15 +38,28 @@ body {
 .form-select:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 
 @media (min-width: 992px) {
-  .tracker-page { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-  .tracker-intro { margin-bottom: 1rem !important; }
-  .tracker-layout { --bs-gutter-y: 1rem; }
+  .tracker-page { padding-top: 3rem !important; padding-bottom: .75rem !important; }
+  .tracker-intro { margin-bottom: .75rem !important; }
+  .tracker-intro p { font-size: 1rem !important; }
+  .tracker-layout { --bs-gutter-y: .75rem; }
   .tracker-page .login-card .card-body,
-  .tracker-page .hero-panel .card-body { padding: 1.5rem !important; }
-  .tracker-page .login-card h2 { margin-bottom: 1rem !important; }
-  .tracker-page .login-card form > div { margin-bottom: .75rem !important; }
-  .tracker-page .login-card form > div:nth-last-child(2) { margin-bottom: 1rem !important; }
-  .tracker-page .col-lg-5 { gap: 1rem !important; }
+  .tracker-page .hero-panel .card-body { padding: 1rem !important; }
+  .tracker-page .login-card h2 { margin-bottom: .75rem !important; }
+  .tracker-page .login-card form > div { margin-bottom: .5rem !important; }
+  .tracker-page .login-card form > div:nth-last-child(2) { margin-bottom: .75rem !important; }
+  .tracker-page .login-card .form-control-lg,
+  .tracker-page .login-card .form-select-lg,
+  .tracker-page .login-card .input-group-lg > .form-control,
+  .tracker-page .login-card .input-group-lg > .form-select {
+    min-height: 2.5rem;
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    font-size: 1rem;
+  }
+  .tracker-page .login-card .btn-lg { padding: .5rem 1rem; font-size: 1rem; }
+  .tracker-page .hero-panel h2 { margin-bottom: .5rem !important; }
+  .tracker-page .hero-panel .list-group-item { padding-top: .5rem; padding-bottom: .5rem; }
+  .tracker-page .col-lg-5 { gap: .75rem !important; }
 }
 
 .goal-panel { border: 1px solid #e5e4db; border-radius: 1.25rem; }
