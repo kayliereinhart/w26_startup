@@ -24,11 +24,14 @@ body {
 .navbar .nav-link:hover, .navbar .nav-link.active { color: #fff; }
 .hero-panel { background: var(--sage); border-radius: 1.5rem; }
 .quote-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
+.celebrations-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
+.celebrations-card .text-uppercase { color: var(--sage); }
 .quote-card .quote-heading { color: #f8f7f2; }
 .quote-card .quote-attribution { color: #e2e8dd; }
 .quote-accent { border-color: var(--sage) !important; }
 .quote-mark { color: var(--sage); font-family: Georgia, serif; font-size: 3rem; line-height: 1; }
 .login-card { border: 1px solid #e5e4db; border-radius: 1.25rem; }
+.notification-item { background: #f8f6ee; border: 1px solid #e5e4db; }
 .btn-forest { background: var(--forest); border-color: var(--forest); color: white; }
 .btn-forest:hover, .btn-forest:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: white; }
 .btn-outline-success:hover, .btn-outline-success:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: #fff; }
