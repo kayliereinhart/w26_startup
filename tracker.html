@@ -2,36 +2,100 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Turners | Reading tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5d913d">
+    <title>Page Turners | Reading Tracker</title>
+    <link rel="icon" type="image/jpeg" href="bookstack.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body class="d-flex flex-column">
     <header>
-      <h1>Page Turners</h1>
-      <nav aria-label="Main navigation">
-        <a href="index.html">Login</a> | 
-        <a href="goals.html">Goals</a> | 
-        <a href="tracker.html">Reading Tracker</a> | 
-        <a href="notifications.html">Notifications</a> | 
-        <a href="rewards.html">Rewards</a>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container py-2">
+          <a class="navbar-brand fw-bold fs-3 d-flex align-items-center gap-3" href="index.html">
+            <img src="bookstack.jpg" alt="" class="brand-image rounded" width="72" height="54">
+            <h1>Page Turners</h1>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto gap-lg-2">
+              <li class="nav-item"><a class="nav-link" href="index.html">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="goals.html">Goals</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="tracker.html">Reading Tracker</a></li>
+              <li class="nav-item"><a class="nav-link" href="notifications.html">Notifications</a></li>
+              <li class="nav-item"><a class="nav-link" href="rewards.html">Rewards</a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
-    <main>
-      <h2>Log today’s reading</h2>
-      <section>
-        <form>
-          <p><label for="reading-goal">Goal</label><br><select id="reading-goal" name="reading-goal"><option>Read The Hobbit</option><option>Read 3 books this month</option></select></p>
-          <p><label for="reading-date">Date</label><br><input id="reading-date" name="reading-date" type="date"></p>
-          <p><label for="reading-amount">Amount read</label><br><input id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25"> <select aria-label="Reading unit"><option>pages</option><option>chapters</option><option>books</option></select></p>
-          <button type="button">Add reading</button>
-        </form>
-      </section>
-      <section aria-labelledby="progress-heading">
-        <h3 id="progress-heading">Recent reading</h3>
-        <ul><li>May 12: 25 pages</li><li>May 11: 18 pages</li><li>May 10: 22 pages</li></ul>
-      </section>
+
+    <main class="container page-content flex-grow-1 py-5">
+      <div class="row g-4 g-xl-5 align-items-stretch">
+        <div class="col-lg-7">
+          <section class="login-card card shadow-sm h-100" aria-labelledby="log-reading-heading">
+            <div class="card-body p-4 p-md-5 d-flex flex-column justify-content-center">
+              <p class="text-uppercase fw-semibold small text-forest mb-2">Reading session</p>
+              <h2 id="log-reading-heading" class="h2 fw-bold mb-4">Add to your tracker</h2>
+              <form>
+                <div class="mb-3">
+                  <label for="reading-goal" class="form-label fw-semibold">Goal</label>
+                  <select class="form-select form-select-lg" id="reading-goal" name="reading-goal">
+                    <option>Read The Hobbit</option>
+                    <option>Read 3 books this month</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="reading-date" class="form-label fw-semibold">Date</label>
+                  <input class="form-control form-control-lg" id="reading-date" name="reading-date" type="date">
+                </div>
+                <div class="mb-4">
+                  <label for="reading-amount" class="form-label fw-semibold">Amount read</label>
+                  <div class="input-group input-group-lg">
+                    <input class="form-control" id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25">
+                    <select class="form-select" name="reading-unit" aria-label="Reading unit">
+                      <option>pages</option>
+                      <option>chapters</option>
+                      <option>books</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-forest btn-lg" type="button">Add reading</button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+
+        <div class="col-lg-5 d-flex flex-column gap-4">
+          <section class="hero-panel p-4 p-md-5" aria-labelledby="tracker-heading">
+            <p class="text-uppercase fw-semibold small text-forest mb-2">One page at a time</p>
+            <h1 id="tracker-heading" class="h2 fw-bold mb-3">Log today&rsquo;s reading</h1>
+            <p class="fs-5 mb-0">Every reading session brings you closer to your goals. Add your progress and keep your momentum going.</p>
+          </section>
+          <section class="login-card card shadow-sm flex-grow-1" aria-labelledby="recent-heading">
+            <div class="card-body p-4 p-md-5">
+              <p class="text-uppercase fw-semibold small text-forest mb-2">Your progress</p>
+              <h2 id="recent-heading" class="h4 fw-bold mb-3">Recent reading</h2>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0">May 12 <span class="text-body-secondary">&middot; 25 pages</span></li>
+                <li class="list-group-item px-0">May 11 <span class="text-body-secondary">&middot; 18 pages</span></li>
+                <li class="list-group-item px-0">May 10 <span class="text-body-secondary">&middot; 22 pages</span></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+      </div>
     </main>
-    <footer><p>Created by Kaylie Reinhart · <a href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></p></footer>
+
+    <footer class="footer text-white-50 py-3 mt-auto">
+      <div class="container text-center small">Created by Kaylie Reinhart &middot; <a class="link-light" href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
