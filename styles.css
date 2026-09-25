@@ -33,6 +33,7 @@ body {
 .btn-forest:hover, .btn-forest:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: white; }
 .btn-outline-success:hover, .btn-outline-success:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: #fff; }
 .text-forest { color: var(--forest) !important; }
+.border-forest { border-color: var(--forest) !important; }
 .form-control:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 .form-select:focus { border-color: #8fc66d; box-shadow: 0 0 0 .25rem rgba(143, 198, 109, .25); }
 
