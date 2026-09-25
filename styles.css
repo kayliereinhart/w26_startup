@@ -33,6 +33,10 @@ body {
 .quote-mark { color: var(--sage); font-family: Georgia, serif; font-size: 3rem; line-height: 1; }
 .login-card { border: 1px solid #e5e4db; border-radius: 1.25rem; }
 .notification-item { background: #f8f6ee; border: 1px solid #e5e4db; }
+.reward-intro { background: var(--sage); border-radius: 1.25rem; }
+.reward-intro .text-uppercase { color: var(--forest-dark); }
+.reward-item { background: #f8f6ee; border: 1px solid #e5e4db; }
+.reward-unlocked { background: #f3f8ef; border-color: #cfdfc4; }
 .btn-forest { background: var(--forest); border-color: var(--forest); color: white; }
 .btn-forest:hover, .btn-forest:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: white; }
 .btn-outline-success:hover, .btn-outline-success:focus { background: var(--forest-dark); border-color: var(--forest-dark); color: #fff; }
