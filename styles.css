@@ -23,6 +23,7 @@ body {
 .navbar .nav-link { color: rgba(255, 255, 255, .8); }
 .navbar .nav-link:hover, .navbar .nav-link.active { color: #fff; }
 .hero-panel { background: var(--sage); border-radius: 1.5rem; }
+#welcome-heading { color: var(--forest-dark); }
 .quote-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
 .celebrations-card { background: var(--forest); border: 1px solid var(--forest-dark); border-radius: 1.25rem; color: #f8f7f2; }
 .celebrations-card .text-uppercase { color: var(--sage); }
