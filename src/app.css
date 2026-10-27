@@ -13,6 +13,16 @@
   font-family: 'Lora', Georgia;
 }
 
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
 .navbar, .footer { background: var(--forest); }
 .navbar-brand { color: #fff !important; }
 .navbar .nav-link { color: rgba(255, 255, 255, .8); }

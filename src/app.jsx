@@ -12,7 +12,7 @@ import { Tracker } from './tracker/tracker';
 export default function App() {
   return (
   <BrowserRouter>
-  <div>
+  <div className="app-container">
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container py-2">
@@ -36,6 +36,7 @@ export default function App() {
       </nav>
     </header>
 
+    <main className="main-content">
     <Routes>
       <Route path='/' element={<Login />} exact />
       <Route path='/goals' element={<Goals />} />
@@ -44,8 +45,9 @@ export default function App() {
       <Route path='/rewards' element={<Rewards />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
+    </main>
 
-    <footer className="footer text-white-50 py-3 mt-auto">
+    <footer className="footer text-white-50 py-3">
       <div className="container text-center small">Created by Kaylie Reinhart · <a className="link-light" href="https://github.com/kayliereinhart/w26_startup">GitHub repository</a></div>
     </footer>
   </div>
