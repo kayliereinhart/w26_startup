@@ -1,6 +1,14 @@
 import React from 'react';
 
 export function Login() {
+  const [quote, setQuote] = React.useState('Loading...');
+  const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
+
+  React.useEffect(() => {
+    setQuote('A reader lives a thousand lives before he dies.');
+    setQuoteAuthor('George R. R. Martin');
+  }, []);
+
   return (
     <main className="container page-content d-flex flex-grow-1 align-items-center py-5">
       <div className="row g-4 g-xl-5 align-items-stretch w-100 mx-auto">
@@ -15,8 +23,8 @@ export function Login() {
               <div className="quote-accent border-start border-3 ps-3">
                 <h2 id="quote-heading" className="quote-heading h6 text-uppercase fw-bold">Today's reading inspiration</h2>
                 <span className="quote-mark" aria-hidden="true">&ldquo;</span>
-                <blockquote className="fs-5 fst-italic mb-1">A reader lives a thousand lives before he dies.</blockquote>
-                <p className="quote-attribution mb-0">&mdash; George R. R. Martin</p>
+                <blockquote className="fs-5 fst-italic mb-1">{quote}</blockquote>
+                <p className="quote-attribution mb-0">&mdash; {quoteAuthor}</p>
               </div>
             </div>
           </aside>
