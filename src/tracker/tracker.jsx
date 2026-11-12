@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+function loadGoalTitles() {
+  try {
+    const goals = JSON.parse(localStorage.getItem('goals') || '[]');
+    return Array.isArray(goals)
+      ? goals.map((goal) => goal.title).filter((title) => typeof title === 'string' && title.trim())
+      : [];
+  } catch {
+    return [];
+  }
+}
 
 export function Tracker() {
+  const [goalTitles] = useState(loadGoalTitles);
+  const [selectedGoal, setSelectedGoal] = useState('');
+  const [readingDate, setReadingDate] = useState('');
+  const [readingAmount, setReadingAmount] = useState('');
+  const canAddReading = selectedGoal && readingDate && readingAmount;
+
   return (
     <main className="container page-content tracker-page flex-grow-1 py-5">
       <section className="tracker-intro mb-4 mb-xl-5" aria-labelledby="tracker-heading">
@@ -15,29 +32,28 @@ export function Tracker() {
               <h2 id="log-reading-heading" className="h3 fw-bold mb-4">Add to your tracker</h2>
               <form>
                 <div className="mb-3">
-                  <label for="reading-goal" className="form-label fw-semibold">Goal</label>
-                  <select className="form-select form-select-lg" id="reading-goal" name="reading-goal">
-                    <option>Read The Hobbit</option>
-                    <option>Read 3 books this month</option>
+                  <label htmlFor="reading-goal" className="form-label fw-semibold">Goal</label>
+                  <select className="form-select form-select-lg" id="reading-goal" name="reading-goal" value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)}>
+                    {goalTitles.length === 0
+                      ? <option value="">No goals available</option>
+                      : <>
+                          <option value="">Select a goal</option>
+                          {goalTitles.map((title, index) => <option key={`${title}-${index}`} value={title}>{title}</option>)}
+                        </>}
                   </select>
                 </div>
                 <div className="mb-3">
                   <label for="reading-date" className="form-label fw-semibold">Date</label>
-                  <input className="form-control form-control-lg" id="reading-date" name="reading-date" type="date"></input>
+                  <input className="form-control form-control-lg" id="reading-date" name="reading-date" type="date" value={readingDate} onChange={(event) => setReadingDate(event.target.value)}></input>
                 </div>
                 <div className="mb-4">
-                  <label for="reading-amount" className="form-label fw-semibold">Amount read</label>
+                  <label for="reading-amount" className="form-label fw-semibold">Pages read</label>
                   <div className="input-group input-group-lg">
-                    <input className="form-control tracker-form-control" id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25"></input>
-                    <select className="form-select tracker-form-control" name="reading-unit" aria-label="Reading unit">
-                      <option>pages</option>
-                      <option>chapters</option>
-                      <option>books</option>
-                    </select>
+                    <input className="form-control tracker-form-control" id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25" value={readingAmount} onChange={(event) => setReadingAmount(event.target.value)}></input>
                   </div>
                 </div>
                 <div className="d-grid">
-                  <button className="btn btn-forest btn-lg" type="button">Add reading</button>
+                  <button className="btn btn-forest btn-lg" type="button" disabled={!canAddReading}>Add reading</button>
                 </div>
               </form>
             </div>
