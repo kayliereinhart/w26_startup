@@ -14,9 +14,8 @@ function loadGoalTitles() {
 export function Tracker() {
   const [goalTitles] = useState(loadGoalTitles);
   const [selectedGoal, setSelectedGoal] = useState('');
-  const [readingDate, setReadingDate] = useState('');
   const [readingAmount, setReadingAmount] = useState('');
-  const canAddReading = selectedGoal && readingDate && Number(readingAmount) > 0;
+  const canAddReading = selectedGoal && Number(readingAmount) > 0;
 
   function addReading() {
     if (!canAddReading) return;
@@ -28,14 +27,27 @@ export function Tracker() {
       const selectedGoalIndex = savedGoals.findIndex((goal) => goal.title === selectedGoal);
       if (selectedGoalIndex === -1) return;
 
-      const updatedGoals = savedGoals.map((goal, index) => (
-        index === selectedGoalIndex
-          ? { ...goal, progress: (Number(goal.progress) || 0) + Number(readingAmount) }
-          : goal
-      ));
+      const goal = savedGoals[selectedGoalIndex];
+      const updatedProgress = (Number(goal.progress) || 0) + Number(readingAmount);
+      const isComplete = updatedProgress >= Number(goal.target);
+      const updatedGoals = isComplete
+        ? savedGoals.filter((_, index) => index !== selectedGoalIndex)
+        : savedGoals.map((goal, index) => (
+          index === selectedGoalIndex ? { ...goal, progress: updatedProgress } : goal
+        ));
+
+      if (isComplete) {
+        const savedRewards = JSON.parse(localStorage.getItem('rewards') || '[]');
+        if (Array.isArray(savedRewards)) {
+          const updatedRewards = savedRewards.map((reward) => (
+            reward.goal === goal.title ? { ...reward, status: 'unlocked' } : reward
+          ));
+          localStorage.setItem('rewards', JSON.stringify(updatedRewards));
+        }
+      }
+
       localStorage.setItem('goals', JSON.stringify(updatedGoals));
       setSelectedGoal('');
-      setReadingDate('');
       setReadingAmount('');
     } catch {
       // Leave the form values intact if saved goals cannot be updated.
@@ -65,10 +77,6 @@ export function Tracker() {
                           {goalTitles.map((title, index) => <option key={`${title}-${index}`} value={title}>{title}</option>)}
                         </>}
                   </select>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="reading-date" className="form-label fw-semibold">Date</label>
-                  <input className="form-control form-control-lg" id="reading-date" name="reading-date" type="date" value={readingDate} onChange={(event) => setReadingDate(event.target.value)}></input>
                 </div>
                 <div className="mb-4">
                   <label htmlFor="reading-amount" className="form-label fw-semibold">Pages read</label>
