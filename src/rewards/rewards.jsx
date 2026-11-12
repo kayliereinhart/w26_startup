@@ -25,6 +25,8 @@ function loadGoals() {
 export function Rewards() {
   const [rewards, setRewards] = useState(loadRewards);
   const [goals] = useState(loadGoals);
+  const [description, setDescription] = useState('');
+  const [selectedGoal, setSelectedGoal] = useState('');
 
   function saveReward(event) {
     event.preventDefault();
@@ -38,6 +40,8 @@ export function Rewards() {
     localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(updatedRewards));
     setRewards(updatedRewards);
     event.currentTarget.reset();
+    setDescription('');
+    setSelectedGoal('');
   }
 
   return (
@@ -62,17 +66,17 @@ export function Rewards() {
               <form className="row g-2" onSubmit={saveReward}>
                 <div className="col-12">
                   <label htmlFor="reward-description" className="form-label fw-semibold">Reward description</label>
-                  <input className="form-control" id="reward-description" name="reward-description" placeholder="Buy a new bookmark" required />
+                  <input className="form-control" id="reward-description" name="reward-description" placeholder="Buy a new bookmark" value={description} onChange={(event) => setDescription(event.target.value)} required />
                 </div>
                 <div className="col-12">
                   <label htmlFor="reward-goal" className="form-label fw-semibold">Unlock when</label>
-                  <select className="form-select" id="reward-goal" name="reward-goal" required disabled={goals.length === 0} defaultValue="">
+                  <select className="form-select" id="reward-goal" name="reward-goal" required disabled={goals.length === 0} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)}>
                     <option value="" disabled>Select a goal</option>
                     {goals.map((goal, index) => <option value={goal.title} key={`${goal.title}-${index}`}>{goal.title}</option>)}
                   </select>
                 </div>
                 <div className="col-12">
-                  <button className="btn btn-forest btn-lg" type="submit" disabled={goals.length === 0}>Save reward</button>
+                  <button className="btn btn-forest btn-lg" type="submit" disabled={!description.trim() || !selectedGoal}>Save reward</button>
                   {goals.length === 0 && <p className="small text-body-secondary mt-2 mb-0">Create a goal before adding a reward.</p>}
                 </div>
               </form>
