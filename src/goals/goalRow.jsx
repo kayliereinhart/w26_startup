@@ -6,7 +6,9 @@ export function GoalRow({ goal }) {
   const percentage = goal.progressPercent;
   const completedBooks = Math.round((percentage / 100) * SHELF_BOOK_COUNT);
   const pace = goal.suggestedPace();
-  const finishDate = new Date(`${goal.finishDate}T00:00:00`);
+  const finishDate = goal.finishDate
+    ? new Date(`${goal.finishDate}T00:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+    : 'No date';
 
   return (
     <tr>
@@ -31,7 +33,7 @@ export function GoalRow({ goal }) {
         {goal.progress} of {goal.target}<br />
         You are {Math.round(percentage)}% complete.
       </td>
-      <td>{finishDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</td>
+      <td>{finishDate}</td>
       <td>{pace.toLocaleString(undefined, { maximumFractionDigits: 1 })} pages per day</td>
     </tr>
   );

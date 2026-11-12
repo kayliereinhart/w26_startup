@@ -13,7 +13,7 @@ export class Goal {
 
   suggestedPace(currentDate = new Date()) {
     const remaining = Math.max(0, this.target - this.progress);
-    if (remaining === 0) return 0;
+    if (remaining === 0 || !this.finishDate) return 0;
 
     const today = new Date(currentDate);
     today.setHours(0, 0, 0, 0);

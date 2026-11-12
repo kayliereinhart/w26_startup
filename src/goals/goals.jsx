@@ -2,13 +2,44 @@ import React, { useState } from 'react';
 import { Goal } from './goal';
 import { GoalRow } from './goalRow';
 
-const localGoals = [
-  new Goal({ title: 'Read The Hobbit', progress: 220, target: 310, finishDate: '2026-11-20' }),
-  new Goal({ title: 'Read 3 pages this month', progress: 1, target: 3, finishDate: '2026-11-30' }),
-];
+const GOALS_STORAGE_KEY = 'goals';
+
+function loadGoals() {
+  const savedGoals = localStorage.getItem(GOALS_STORAGE_KEY);
+  if (!savedGoals) return [];
+
+  try {
+    const parsedGoals = JSON.parse(savedGoals);
+    return Array.isArray(parsedGoals)
+      ? parsedGoals.map((goal) => new Goal(goal))
+      : [];
+  } catch {
+    return [];
+  }
+}
 
 export function Goals() {
-  const [goals, setGoals] = useState(localGoals);
+  const [goals, setGoals] = useState(loadGoals);
+  const [title, setTitle] = useState('');
+  const [target, setTarget] = useState('');
+
+  function saveGoal(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const goal = new Goal({
+      title: formData.get('goal-title').trim(),
+      progress: 0,
+      target: Number(formData.get('goal-amount')),
+      finishDate: formData.get('goal-date') || null,
+    });
+    const updatedGoals = [...goals, goal];
+
+    localStorage.setItem(GOALS_STORAGE_KEY, JSON.stringify(updatedGoals));
+    setGoals(updatedGoals);
+    setTitle('');
+    setTarget('');
+    event.currentTarget.reset();
+  }
 
   return (
     <main className="container goals-content py-5 flex-grow-1">
@@ -25,7 +56,9 @@ export function Goals() {
                 <table className="table align-middle goals-table mb-0">
                   <thead><tr><th scope="col">Goal</th><th scope="col">Progress</th><th scope="col">Finish date</th><th scope="col">Suggested pace</th></tr></thead>
                   <tbody>
-                    {goals.map((goal) => <GoalRow goal={goal} key={goal.title} />)}
+                    {goals.length === 0
+                      ? <tr><td colSpan="4">No goals</td></tr>
+                      : goals.map((goal, index) => <GoalRow goal={goal} key={`${goal.title}-${index}`} />)}
                   </tbody>
                 </table>
               </div>
@@ -36,11 +69,11 @@ export function Goals() {
           <div className="goal-panel card shadow-sm">
             <div className="card-body p-4 p-md-5">
               <h2 id="new-goal-heading" className="h4 fw-bold mb-3">Set a new goal</h2>
-              <form className="row g-3">
-                <div className="col-md-6"><label htmlFor="goal-title" className="form-label fw-semibold">What do you want to read?</label><input className="form-control" id="goal-title" name="goal-title" placeholder="Finish The Hobbit" required /></div>
-                <div className="col-md-6"><label htmlFor="goal-amount" className="form-label fw-semibold">Target amount of pages</label><input className="form-control" id="goal-amount" name="goal-amount" type="number" min="1" placeholder="310" required /></div>
+              <form className="row g-3" onSubmit={saveGoal}>
+                <div className="col-md-6"><label htmlFor="goal-title" className="form-label fw-semibold">What do you want to read?</label><input className="form-control" id="goal-title" name="goal-title" placeholder="Finish The Hobbit" value={title} onChange={(event) => setTitle(event.target.value)} required /></div>
+                <div className="col-md-6"><label htmlFor="goal-amount" className="form-label fw-semibold">Target amount of pages</label><input className="form-control" id="goal-amount" name="goal-amount" type="number" min="1" placeholder="310" value={target} onChange={(event) => setTarget(event.target.value)} required /></div>
                 <div className="col-md-6"><label htmlFor="goal-date" className="form-label fw-semibold">Optional finish date</label><input className="form-control" id="goal-date" name="goal-date" type="date" /></div>
-                <div className="col-12"><button className="btn btn-forest btn-lg" type="button">Save goal</button></div>
+                <div className="col-12"><button className="btn btn-forest btn-lg" type="submit" disabled={!title.trim() || !target || Number(target) < 1}>Save goal</button></div>
               </form>
             </div>
           </div>
