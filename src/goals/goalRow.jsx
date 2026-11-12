@@ -32,7 +32,7 @@ export function GoalRow({ goal }) {
         You are {Math.round(percentage)}% complete.
       </td>
       <td>{finishDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</td>
-      <td>{pace.toLocaleString(undefined, { maximumFractionDigits: 1 })} per day</td>
+      <td>{pace.toLocaleString(undefined, { maximumFractionDigits: 1 })} pages per day</td>
     </tr>
   );
 }
