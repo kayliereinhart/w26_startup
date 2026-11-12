@@ -44,6 +44,12 @@ export function Rewards() {
     setSelectedGoal('');
   }
 
+  function markRewardEnjoyed(rewardIndex) {
+    const updatedRewards = rewards.filter((_, index) => index !== rewardIndex);
+    localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(updatedRewards));
+    setRewards(updatedRewards);
+  }
+
   return (
     <main className="container page-content flex-grow-1 py-5">
       <section className="mb-4" aria-labelledby="rewards-heading">
@@ -103,6 +109,11 @@ export function Rewards() {
                             </span>
                           </div>
                           <p className="mb-0">{unlocked ? `Earned for completing “${reward.goal}.”` : `Unlock by completing “${reward.goal}.”`}</p>
+                          {unlocked && (
+                            <button className="btn btn-forest mt-3" type="button" onClick={() => markRewardEnjoyed(index)}>
+                              Mark as enjoyed
+                            </button>
+                          )}
                         </div>
                       </article>
                     );
