@@ -34,6 +34,8 @@ export function Tracker() {
           : goal
       ));
       localStorage.setItem('goals', JSON.stringify(updatedGoals));
+      setSelectedGoal('');
+      setReadingDate('');
       setReadingAmount('');
     } catch {
       // Leave the form values intact if saved goals cannot be updated.
@@ -47,7 +49,7 @@ export function Tracker() {
         <p className="fs-5 mb-0">Add your progress and keep your momentum going.</p>
       </section>
       <div className="row tracker-layout g-4 g-xl-5 align-items-stretch">
-        <div className="col-lg-7">
+        <div className="col-12">
           <section className="login-card card shadow-sm h-100" aria-labelledby="log-reading-heading">
             <div className="card-body p-4 p-md-5 d-flex flex-column justify-content-center">
               <p className="text-uppercase fw-semibold small text-forest mb-2">Reading session</p>
@@ -65,11 +67,11 @@ export function Tracker() {
                   </select>
                 </div>
                 <div className="mb-3">
-                  <label for="reading-date" className="form-label fw-semibold">Date</label>
+                  <label htmlFor="reading-date" className="form-label fw-semibold">Date</label>
                   <input className="form-control form-control-lg" id="reading-date" name="reading-date" type="date" value={readingDate} onChange={(event) => setReadingDate(event.target.value)}></input>
                 </div>
                 <div className="mb-4">
-                  <label for="reading-amount" className="form-label fw-semibold">Pages read</label>
+                  <label htmlFor="reading-amount" className="form-label fw-semibold">Pages read</label>
                   <div className="input-group input-group-lg">
                     <input className="form-control tracker-form-control" id="reading-amount" name="reading-amount" type="number" min="1" placeholder="25" value={readingAmount} onChange={(event) => setReadingAmount(event.target.value)}></input>
                   </div>
@@ -78,20 +80,6 @@ export function Tracker() {
                   <button className="btn btn-forest btn-lg" type="button" disabled={!canAddReading} onClick={addReading}>Add reading</button>
                 </div>
               </form>
-            </div>
-          </section>
-        </div>
-
-        <div className="col-lg-5 d-flex flex-column gap-4">
-          <section className="hero-panel card border-0" aria-labelledby="recent-heading">
-            <div className="card-body p-4 p-md-5">
-              <p className="text-uppercase fw-semibold small text-forest mb-2">Your progress</p>
-              <h2 id="recent-heading" className="h4 fw-bold mb-3">Recent reading</h2>
-              <ul className="list-group list-group-flush bg-transparent">
-                <li className="list-group-item bg-transparent border-forest">May 12 <span className="text-body-secondary">&middot; 25 pages</span></li>
-                <li className="list-group-item bg-transparent border-forest">May 11 <span className="text-body-secondary">&middot; 18 pages</span></li>
-                <li className="list-group-item bg-transparent border-forest">May 10 <span className="text-body-secondary">&middot; 22 pages</span></li>
-              </ul>
             </div>
           </section>
         </div>
