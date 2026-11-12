@@ -112,3 +112,4 @@
 .shelf-book:nth-child(5n + 3) { height: 21px; }
 .shelf-book:nth-child(5n + 4) { height: 27px; }
 .shelf-book:nth-child(5n) { height: 25px; }
+.book-shelf .shelf-book:not(.shelf-book-complete) { background: #eeece3; }

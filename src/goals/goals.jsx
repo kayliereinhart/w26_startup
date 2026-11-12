@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Goal } from './goal';
+import { GoalRow } from './goalRow';
+
+// Keep the UI backed by goal-shaped data so this initializer can later be
+// replaced with API-loaded goals without changing the progress display.
+const localGoals = [
+  new Goal({ title: 'Read The Hobbit', progress: 220, target: 310, finishDate: '2026-12-31' }),
+  new Goal({ title: 'Read 3 books this month', progress: 1, target: 3, finishDate: '2026-11-30' }),
+];
 
 export function Goals() {
+  const [goals, setGoals] = useState(localGoals);
+
   return (
     <main className="container goals-content py-5 flex-grow-1">
       <div className="mb-4">
@@ -16,8 +27,7 @@ export function Goals() {
                 <table className="table align-middle goals-table mb-0">
                   <thead><tr><th scope="col">Goal</th><th scope="col">Progress</th><th scope="col">Finish date</th><th scope="col">Suggested pace</th></tr></thead>
                   <tbody>
-                    <tr><td>Read The Hobbit</td><td><div className="book-shelf" role="progressbar" aria-label="Read The Hobbit progress" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span></div><span className="visually-hidden">100% complete, displayed as 10 of 10 books.</span>310 of 310 pages<br></br>You are 100% complete.</td><td>May 31</td><td>10 pages/day</td></tr>
-                    <tr><td>Read 3 books this month</td><td><div className="book-shelf" role="progressbar" aria-label="Read 3 books this month progress" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"><span className="shelf-book"></span><span className="shelf-book"></span><span className="shelf-book"></span></div><span className="visually-hidden">33% complete, displayed as 3 of 10 books.</span>1 of 3 books<br></br>You are 33% complete.</td><td>May 31</td><td>2 books/week</td></tr>
+                    {goals.map((goal) => <GoalRow goal={goal} key={goal.title} />)}
                   </tbody>
                 </table>
               </div>
@@ -29,10 +39,10 @@ export function Goals() {
             <div className="card-body p-4 p-md-5">
               <h2 id="new-goal-heading" className="h4 fw-bold mb-3">Set a new goal</h2>
               <form className="row g-3">
-                <div className="col-md-6"><label for="goal-title" className="form-label fw-semibold">What do you want to read?</label><input className="form-control" id="goal-title" name="goal-title" placeholder="Finish The Hobbit" required></input></div>
-                <div className="col-md-6"><label for="goal-type" className="form-label fw-semibold">Measure progress by</label><select className="form-select" id="goal-type" name="goal-type"><option>Pages</option><option>Chapters</option><option>Books</option></select></div>
-                <div className="col-md-6"><label for="goal-amount" className="form-label fw-semibold">Target amount</label><input className="form-control" id="goal-amount" name="goal-amount" type="number" min="1" placeholder="310" required></input></div>
-                <div className="col-md-6"><label for="goal-date" className="form-label fw-semibold">Optional finish date</label><input className="form-control" id="goal-date" name="goal-date" type="date"></input></div>
+                <div className="col-md-6"><label htmlFor="goal-title" className="form-label fw-semibold">What do you want to read?</label><input className="form-control" id="goal-title" name="goal-title" placeholder="Finish The Hobbit" required /></div>
+                <div className="col-md-6"><label htmlFor="goal-type" className="form-label fw-semibold">Measure progress by</label><select className="form-select" id="goal-type" name="goal-type"><option>Pages</option><option>Chapters</option><option>Books</option></select></div>
+                <div className="col-md-6"><label htmlFor="goal-amount" className="form-label fw-semibold">Target amount</label><input className="form-control" id="goal-amount" name="goal-amount" type="number" min="1" placeholder="310" required /></div>
+                <div className="col-md-6"><label htmlFor="goal-date" className="form-label fw-semibold">Optional finish date</label><input className="form-control" id="goal-date" name="goal-date" type="date" /></div>
                 <div className="col-12"><button className="btn btn-forest btn-lg" type="button">Save goal</button></div>
               </form>
             </div>
