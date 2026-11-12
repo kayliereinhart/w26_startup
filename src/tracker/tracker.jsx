@@ -16,7 +16,29 @@ export function Tracker() {
   const [selectedGoal, setSelectedGoal] = useState('');
   const [readingDate, setReadingDate] = useState('');
   const [readingAmount, setReadingAmount] = useState('');
-  const canAddReading = selectedGoal && readingDate && readingAmount;
+  const canAddReading = selectedGoal && readingDate && Number(readingAmount) > 0;
+
+  function addReading() {
+    if (!canAddReading) return;
+
+    try {
+      const savedGoals = JSON.parse(localStorage.getItem('goals') || '[]');
+      if (!Array.isArray(savedGoals)) return;
+
+      const selectedGoalIndex = savedGoals.findIndex((goal) => goal.title === selectedGoal);
+      if (selectedGoalIndex === -1) return;
+
+      const updatedGoals = savedGoals.map((goal, index) => (
+        index === selectedGoalIndex
+          ? { ...goal, progress: (Number(goal.progress) || 0) + Number(readingAmount) }
+          : goal
+      ));
+      localStorage.setItem('goals', JSON.stringify(updatedGoals));
+      setReadingAmount('');
+    } catch {
+      // Leave the form values intact if saved goals cannot be updated.
+    }
+  }
 
   return (
     <main className="container page-content tracker-page flex-grow-1 py-5">
@@ -53,7 +75,7 @@ export function Tracker() {
                   </div>
                 </div>
                 <div className="d-grid">
-                  <button className="btn btn-forest btn-lg" type="button" disabled={!canAddReading}>Add reading</button>
+                  <button className="btn btn-forest btn-lg" type="button" disabled={!canAddReading} onClick={addReading}>Add reading</button>
                 </div>
               </form>
             </div>
