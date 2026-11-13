@@ -57,7 +57,7 @@ export default function App() {
       <Route path='/goals' element={<Goals userName={userName} />} />
       <Route path='/tracker' element={<Tracker />} />
       <Route path='/notifications' element={<Notifications />} />
-      <Route path='/rewards' element={<Rewards />} />
+      <Route path='/rewards' element={<Rewards userName={userName} />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
     </main>

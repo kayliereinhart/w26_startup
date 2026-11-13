@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Reward } from './reward';
 
-const REWARDS_STORAGE_KEY = 'rewards';
-
-export function Rewards() {
+export function Rewards({username}) {
   const [rewards, setRewards] = useState([]);
   const [goals, setGoals] = useState([]);
   const [description, setDescription] = useState('');
@@ -36,25 +34,31 @@ export function Rewards() {
     loadGoals().catch((error) => console.error(error));
   }, []);
 
-  function saveReward(event) {
+  async function saveReward(event) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const reward = new Reward({
       goal: formData.get('reward-goal'),
       description: formData.get('reward-description').trim(),
+      username: username,
     });
-    const updatedRewards = [...rewards, reward];
 
-    localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(updatedRewards));
-    setRewards(updatedRewards);
-    event.currentTarget.reset();
+    const response = await fetch('/api/reward', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(reward),
+    });
+    if (!response.ok) throw new Error(`Could not save reward: ${response.status}`);
+    const data = await response.json();
+    setRewards(data.map((savedReward) => new Reward(savedReward)));
+    form.reset();
     setDescription('');
     setSelectedGoal('');
   }
 
   function markRewardEnjoyed(rewardIndex) {
     const updatedRewards = rewards.filter((_, index) => index !== rewardIndex);
-    localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(updatedRewards));
     setRewards(updatedRewards);
   }
 
