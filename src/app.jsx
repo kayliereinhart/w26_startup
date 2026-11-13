@@ -54,7 +54,7 @@ export default function App() {
         />
       } 
       exact />
-      <Route path='/goals' element={<Goals />} />
+      <Route path='/goals' element={<Goals userName={userName} />} />
       <Route path='/tracker' element={<Tracker />} />
       <Route path='/notifications' element={<Notifications />} />
       <Route path='/rewards' element={<Rewards />} />

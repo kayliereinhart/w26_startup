@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Goal } from './goal';
 import { GoalRow } from './goalRow';
 
-export function Goals() {
+export function Goals({ userName }) {
   const [goals, setGoals] = useState([]);
   const [title, setTitle] = useState('');
   const [target, setTarget] = useState('');
@@ -32,6 +32,7 @@ export function Goals() {
       progress: 0,
       target: Number(formData.get('goal-amount')),
       finishDate: formData.get('goal-date') || null,
+      username: userName,
     });
 
     const response = await fetch('/api/goal', {

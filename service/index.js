@@ -66,6 +66,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 const verifyAuth = async (req, res, next) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
+    req.user = user;
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -73,14 +74,15 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetGoals
-apiRouter.get('/goals', verifyAuth, (_req, res) => {
-  res.send(goals);
+apiRouter.get('/goals', verifyAuth, (req, res) => {
+  res.send(goals.filter((goal) => goal.username === req.user.email));
 });
 
 // SubmitGoal
 apiRouter.post('/goal', verifyAuth, (req, res) => {
-  goals = updateGoals(req.body);
-  res.send(goals);
+  const goal = { ...req.body, username: req.user.email };
+  goals = updateGoals(goal);
+  res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
 });
 
 // Default error handler

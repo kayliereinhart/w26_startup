@@ -1,9 +1,10 @@
 export class Goal {
-  constructor({ title, progress, target, finishDate }) {
+  constructor({ title, progress, target, finishDate, username }) {
     this.title = title;
     this.progress = progress;
     this.target = target;
     this.finishDate = finishDate;
+    this.username = username;
   }
 
   get progressPercent() {
