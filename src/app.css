@@ -38,6 +38,7 @@
 .quote-accent { border-color: var(--sage) !important; }
 .quote-mark { color: var(--sage); font-family: Georgia, serif; font-size: 3rem; line-height: 1; }
 .login-card { border: 1px solid #e5e4db; border-radius: 1.25rem; }
+.login-card-fixed { height: 32rem; }
 .notification-item { background: #f8f6ee; border: 1px solid #e5e4db; }
 .reward-intro { background: var(--sage); border-radius: 1.25rem; }
 .reward-intro .text-uppercase { color: var(--forest-dark); }

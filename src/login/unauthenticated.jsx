@@ -65,7 +65,7 @@ export function Unauthenticated({ userName: initialUserName = '', onLogin }) {
           <aside className="quote-card card shadow-sm" aria-labelledby="quote-heading">
             <div className="card-body p-4 p-md-5">
               <div className="quote-accent border-start border-3 ps-3">
-                <h2 id="quote-heading" className="quote-heading h6 text-uppercase fw-bold">Today's reading inspiration</h2>
+                <h2 id="quote-heading" className="quote-heading h6 text-uppercase fw-bold">Today's poem</h2>
                 <span className="quote-mark" aria-hidden="true">&ldquo;</span>
                 <blockquote className="fs-5 fst-italic mb-1">{quote}</blockquote>
                 <p className="quote-attribution mb-0">&mdash; {quoteAuthor}</p>
@@ -75,7 +75,7 @@ export function Unauthenticated({ userName: initialUserName = '', onLogin }) {
         </div>
 
         <div className="col-lg-6">
-          <section className="login-card card shadow-sm h-100" aria-labelledby="login-heading">
+          <section className="login-card login-card-fixed card shadow-sm" aria-labelledby="login-heading">
             <div className="card-body p-4 p-md-5 d-flex flex-column justify-content-center">
               <p className="text-uppercase fw-semibold small text-forest mb-2">Welcome back</p>
               <h2 id="login-heading" className="h2 fw-bold mb-2">Sign in or join us</h2>
