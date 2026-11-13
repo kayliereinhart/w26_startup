@@ -115,6 +115,17 @@ apiRouter.post('/reward', verifyAuth, (req, res) => {
   res.send(rewards.filter((savedReward) => savedReward.username === req.user.email));
 });
 
+// DeleteReward removes an authenticated user's reward after it is enjoyed.
+apiRouter.delete('/reward/:id', verifyAuth, (req, res) => {
+  const reward = rewards.find((savedReward) => (
+    savedReward.id === req.params.id && savedReward.username === req.user.email
+  ));
+  if (!reward) return res.status(404).send({ msg: 'Reward not found' });
+
+  rewards = rewards.filter((savedReward) => savedReward !== reward);
+  res.status(204).end();
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });

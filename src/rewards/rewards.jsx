@@ -58,9 +58,13 @@ export function Rewards({username}) {
     setSelectedGoal('');
   }
 
-  function markRewardEnjoyed(rewardId) {
-    const updatedRewards = rewards.filter((reward) => reward.id !== rewardId);
-    setRewards(updatedRewards);
+  async function markRewardEnjoyed(rewardId) {
+    const response = await fetch(`/api/reward/${encodeURIComponent(rewardId)}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) throw new Error(`Could not delete reward: ${response.status}`);
+
+    setRewards((currentRewards) => currentRewards.filter((reward) => reward.id !== rewardId));
   }
 
   return (
