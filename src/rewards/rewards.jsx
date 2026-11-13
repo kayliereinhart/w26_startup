@@ -23,10 +23,27 @@ function loadGoals() {
 }
 
 export function Rewards() {
-  const [rewards, setRewards] = useState(loadRewards);
+  const [rewards, setRewards] = useState([]);
   const [goals] = useState(loadGoals);
   const [description, setDescription] = useState('');
   const [selectedGoal, setSelectedGoal] = useState('');
+
+  async function loadRewards() {
+      return fetch('/api/rewards')
+        .then((response) => {
+          if (!response.ok) throw new Error(`Could not load rewards: ${response.status}`);
+          return response.json();
+        })
+        .then((data) => setRewards(data.map((reward) => new Reward(reward))))
+        .catch((error) => {
+          console.error(error);
+          throw error;
+        });
+    }
+  
+    React.useEffect(() => {
+      loadRewards().catch(() => {});
+    }, []);
 
   function saveReward(event) {
     event.preventDefault();
