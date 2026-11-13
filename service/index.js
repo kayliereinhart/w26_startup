@@ -110,7 +110,7 @@ apiRouter.get('/rewards', verifyAuth, (req, res) => {
 
 // SubmitReward
 apiRouter.post('/reward', verifyAuth, (req, res) => {
-  const reward = { ...req.body, username: req.user.email };
+  const reward = { ...req.body, id: req.body.id || uuid.v4(), username: req.user.email };
   rewards = updateRewards(reward);
   res.send(rewards.filter((savedReward) => savedReward.username === req.user.email));
 });

@@ -40,7 +40,7 @@ export function Rewards({username}) {
     const formData = new FormData(form);
     const selectedGoalRecord = goals.find((goal) => goal.id === formData.get('reward-goal'));
     const reward = new Reward({
-      goal: selectedGoalRecord?.title || '',
+      goal: selectedGoalRecord?.id || '',
       description: formData.get('reward-description').trim(),
       username: username,
     });
@@ -58,8 +58,8 @@ export function Rewards({username}) {
     setSelectedGoal('');
   }
 
-  function markRewardEnjoyed(rewardIndex) {
-    const updatedRewards = rewards.filter((_, index) => index !== rewardIndex);
+  function markRewardEnjoyed(rewardId) {
+    const updatedRewards = rewards.filter((reward) => reward.id !== rewardId);
     setRewards(updatedRewards);
   }
 
@@ -110,11 +110,11 @@ export function Rewards({username}) {
               <div className="row g-3">
                 {rewards.length === 0
                   ? <p className="mb-0">No rewards yet.</p>
-                  : rewards.map((reward, index) => {
+                  : rewards.map((reward) => {
                     const unlocked = reward.status === 'unlocked';
-                    const goalTitle = reward.goal || 'your reading goal';
+                    const goalTitle = goals.find((goal) => goal.id === reward.goal)?.title || 'your reading goal';
                     return (
-                      <article className="col-md-6" key={`${reward.goal}-${index}`}>
+                      <article className="col-md-6" key={reward.id}>
                         <div className={`reward-item${unlocked ? ' reward-unlocked' : ''} rounded-4 p-4 h-100`}>
                           <div className="d-flex justify-content-between align-items-start gap-3 mb-2">
                           <h3 className="h5 fw-bold mb-0">{reward.description}</h3>
@@ -124,7 +124,7 @@ export function Rewards({username}) {
                           </div>
                           <p className="mb-0">{unlocked ? `Earned for completing “${goalTitle}.”` : `Unlock by completing “${goalTitle}.”`}</p>
                           {unlocked && (
-                            <button className="btn btn-forest mt-3" type="button" onClick={() => markRewardEnjoyed(index)}>
+                            <button className="btn btn-forest mt-3" type="button" onClick={() => markRewardEnjoyed(reward.id)}>
                               Mark as enjoyed
                             </button>
                           )}
