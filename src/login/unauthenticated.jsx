@@ -34,8 +34,23 @@ export function Unauthenticated({ userName: initialUserName = '', onLogin }) {
   }
 
   React.useEffect(() => {
-    setQuote('A reader lives a thousand lives before he dies.');
-    setQuoteAuthor('George R. R. Martin');
+    async function loadPoem() {
+      try {
+        const response = await fetch('https://poetrydb.org/random/1/author,lines');
+        if (!response.ok) throw new Error('Could not load a poem');
+
+        const [poem] = await response.json();
+        if (!poem || !Array.isArray(poem.lines)) throw new Error('No poem found');
+
+        setQuote(poem.lines.filter((line) => line.trim()).join(' '));
+        setQuoteAuthor(poem.author || 'Unknown author');
+      } catch {
+        setQuote('A poem could not be loaded right now.');
+        setQuoteAuthor('');
+      }
+    }
+
+    loadPoem();
   }, []);
 
   return (
