@@ -4,15 +4,6 @@ import { Reward } from './reward';
 const REWARDS_STORAGE_KEY = 'rewards';
 const GOALS_STORAGE_KEY = 'goals';
 
-function loadRewards() {
-  try {
-    const savedRewards = JSON.parse(localStorage.getItem(REWARDS_STORAGE_KEY) || '[]');
-    return Array.isArray(savedRewards) ? savedRewards.map((reward) => new Reward(reward)) : [];
-  } catch {
-    return [];
-  }
-}
-
 function loadGoals() {
   try {
     const savedGoals = JSON.parse(localStorage.getItem(GOALS_STORAGE_KEY) || '[]');
