@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 
-function loadGoalTitles() {
-  try {
-    const goals = JSON.parse(localStorage.getItem('goals') || '[]');
-    return Array.isArray(goals)
-      ? goals.map((goal) => goal.title).filter((title) => typeof title === 'string' && title.trim())
-      : [];
-  } catch {
-    return [];
-  }
-}
-
 export function Tracker() {
-  const [goalTitles] = useState(loadGoalTitles);
+  const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState('');
   const [readingAmount, setReadingAmount] = useState('');
   const canAddReading = selectedGoal && Number(readingAmount) > 0;
+
+  React.useEffect(() => {
+    fetch('/api/goals')
+      .then((response) => {
+        if (!response.ok) throw new Error(`Could not load goals: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => setGoals(Array.isArray(data) ? data : []))
+      .catch((error) => console.error(error));
+  }, []);
 
   function addReading() {
     if (!canAddReading) return;
@@ -70,11 +69,14 @@ export function Tracker() {
                 <div className="mb-3">
                   <label htmlFor="reading-goal" className="form-label fw-semibold">Goal</label>
                   <select className="form-select form-select-lg" id="reading-goal" name="reading-goal" value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)}>
-                    {goalTitles.length === 0
+                    {goals.length === 0
                       ? <option value="">No goals available</option>
                       : <>
                           <option value="">Select a goal</option>
-                          {goalTitles.map((title, index) => <option key={`${title}-${index}`} value={title}>{title}</option>)}
+                          {goals
+                            .map((goal) => goal.title)
+                            .filter((title) => typeof title === 'string' && title.trim())
+                            .map((title, index) => <option key={`${title}-${index}`} value={title}>{title}</option>)}
                         </>}
                   </select>
                 </div>
