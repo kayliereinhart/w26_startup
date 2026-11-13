@@ -19,11 +19,21 @@ function loadGoals() {
 }
 
 export function Goals() {
-  const [goals, setGoals] = useState(loadGoals);
+  const [goals, setGoals] = useState([]);
   const [title, setTitle] = useState('');
   const [target, setTarget] = useState('');
 
-  function saveGoal(event) {
+  React.useEffect(() => {
+    fetch('/api/goals')
+      .then((response) => {
+        if (!response.ok) throw new Error(`Could not load goals: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => setGoals(data.map((goal) => new Goal(goal))))
+      .catch((error) => console.error(error));
+  }, []);
+
+  function saveGoal1(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const goal = new Goal({
