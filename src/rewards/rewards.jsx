@@ -2,20 +2,10 @@ import React, { useState } from 'react';
 import { Reward } from './reward';
 
 const REWARDS_STORAGE_KEY = 'rewards';
-const GOALS_STORAGE_KEY = 'goals';
-
-function loadGoals() {
-  try {
-    const savedGoals = JSON.parse(localStorage.getItem(GOALS_STORAGE_KEY) || '[]');
-    return Array.isArray(savedGoals) ? savedGoals : [];
-  } catch {
-    return [];
-  }
-}
 
 export function Rewards() {
   const [rewards, setRewards] = useState([]);
-  const [goals] = useState(loadGoals);
+  const [goals, setGoals] = useState([]);
   const [description, setDescription] = useState('');
   const [selectedGoal, setSelectedGoal] = useState('');
 
@@ -31,10 +21,20 @@ export function Rewards() {
           throw error;
         });
     }
+
+  async function loadGoals() {
+    return fetch('/api/goals')
+      .then((response) => {
+        if (!response.ok) throw new Error(`Could not load goals: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => setGoals(data));
+  }
   
-    React.useEffect(() => {
-      loadRewards().catch(() => {});
-    }, []);
+  React.useEffect(() => {
+    loadRewards().catch(() => {});
+    loadGoals().catch((error) => console.error(error));
+  }, []);
 
   function saveReward(event) {
     event.preventDefault();
