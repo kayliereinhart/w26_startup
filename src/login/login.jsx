@@ -5,7 +5,7 @@ import { Unauthenticated } from './unauthenticated';
 
 export function Login({ authState, userName, onAuthChange }) {
   if (authState === AuthState.Authenticated) {
-    return <Authenticated userName={userName} onAuthChange={onAuthChange} />;
+    return <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />;
   }
 
   return <Unauthenticated

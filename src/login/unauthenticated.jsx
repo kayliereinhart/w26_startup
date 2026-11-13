@@ -1,10 +1,37 @@
 import React from 'react';
+import { MessageDialog } from './messageDialog';
 
 export function Unauthenticated({ userName: initialUserName = '', onLogin }) {
   const [userName, setUserName] = React.useState(initialUserName);
   const [password, setPassword] = React.useState('');
+  const [displayError, setDisplayError] = React.useState(null);
   const [quote, setQuote] = React.useState('Loading...');
   const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
+
+  async function loginUser() {
+    loginOrCreate(`/api/auth/login`);
+  }
+
+  async function createUser() {
+    loginOrCreate(`/api/auth/create`);
+  }
+
+  async function loginOrCreate(endpoint) {
+    const response = await fetch(endpoint, {
+      method: 'post',
+      body: JSON.stringify({ email: userName, password: password }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem('userName', userName);
+      onLogin(userName);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
 
   React.useEffect(() => {
     setQuote('A reader lives a thousand lives before he dies.');
@@ -47,14 +74,16 @@ export function Unauthenticated({ userName: initialUserName = '', onLogin }) {
                   <input className="form-control form-control-lg" id="password" name="password" type="password" placeholder="Enter your password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div className="d-grid gap-2">
-                  <button className="btn btn-forest btn-lg" type="button" disabled={!userName || !password} onClick={() => { localStorage.setItem('userName', userName); onLogin?.(userName); }}>Sign in</button>
-                  <button className="btn btn-outline-success btn-lg" type="button" disabled={!userName || !password} onClick={() => { localStorage.setItem('userName', userName); onLogin?.(userName); }}>Create account</button>
+                  <button className="btn btn-forest btn-lg" type="button" disabled={!userName || !password} onClick={() => loginUser()}>Sign in</button>
+                  <button className="btn btn-outline-success btn-lg" type="button" disabled={!userName || !password} onClick={() => createUser()}>Create account</button>
                 </div>
               </form>
             </div>
           </section>
         </div>
       </div>
+
+      <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
     </main>
   );
 }

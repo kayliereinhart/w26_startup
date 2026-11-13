@@ -1,7 +1,20 @@
 import React from 'react';
 import { AuthState } from './authState';
 
-export function Authenticated({ userName, onAuthChange }) {
+export function Authenticated({ userName, onLogout }) {
+  function logout() {
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    })
+      .catch(() => {
+        // Logout failed. Assuming offline
+      })
+      .finally(() => {
+        localStorage.removeItem('userName');
+        onLogout();
+      });
+  }
+
   return (
     <main className="container page-content d-flex flex-grow-1 align-items-center py-5">
       <section className="hero-panel p-4 p-md-5 w-100" aria-labelledby="welcome-heading">
@@ -13,7 +26,7 @@ export function Authenticated({ userName, onAuthChange }) {
         <button
           className="btn btn-outline-success mt-4 align-self-start"
           type="button"
-          onClick={() => onAuthChange?.('', AuthState.Unauthenticated)}
+          onClick={() => logout()}
         >
           Log out
         </button>
