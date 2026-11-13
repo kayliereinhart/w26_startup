@@ -8,6 +8,7 @@ const authCookieName = 'token';
 
 // The users are saved in memory and disappear whenever the service is restarted.
 let users = [];
+let goals = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -71,6 +72,17 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
+// GetGoals
+apiRouter.get('/goals', verifyAuth, (_req, res) => {
+  res.send(goals);
+});
+
+// SubmitGoal
+apiRouter.post('/goal', verifyAuth, (req, res) => {
+  goals = updateGoals(req.body);
+  res.send(goals);
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
@@ -81,6 +93,11 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
+// updateGoals adds a new goal to goals.
+function updateGoals(newGoal) {
+  goals.push(newGoal);
+  return goals;
+}
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
