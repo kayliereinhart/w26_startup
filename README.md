@@ -117,14 +117,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **Node.js/Express HTTP service** - I used node.js and express to create my service (see index.js).
+- [X] **Static middleware for frontend** - I served up the front-end static content hosting (see index.js).
 - [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-- [ ] **Uses BCrypt to hash passwords** - I did not complete this part of the deliverable.
+- [X] **Backend service endpoints** - I made backend service endpoints for retrieving, updating, and deleting goals, rewards, and login information (see index.js).
+- [X] **Frontend calls service endpoints** - I made calls to the service endpoints (see authenticated.jsx, unauthenticated.jsx, goals.jsx, tracker.jsx, and rewards.jsx).
+- [X] **Supports registration, login, logout, and restricted endpoint** - I did complete this part of the deliverable (see login.jsx, authenticated.jsx, unauthenticated.jsx).
+- [X] **Uses BCrypt to hash passwords** - I did complete this part of the deliverable (see index.jsx).
 
 ## 🚀 DB deliverable
 
