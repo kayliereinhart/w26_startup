@@ -2,22 +2,6 @@ import React, { useState } from 'react';
 import { Goal } from './goal';
 import { GoalRow } from './goalRow';
 
-const GOALS_STORAGE_KEY = 'goals';
-
-function loadGoals() {
-  const savedGoals = localStorage.getItem(GOALS_STORAGE_KEY);
-  if (!savedGoals) return [];
-
-  try {
-    const parsedGoals = JSON.parse(savedGoals);
-    return Array.isArray(parsedGoals)
-      ? parsedGoals.map((goal) => new Goal(goal))
-      : [];
-  } catch {
-    return [];
-  }
-}
-
 export function Goals() {
   const [goals, setGoals] = useState([]);
   const [title, setTitle] = useState('');
@@ -33,22 +17,21 @@ export function Goals() {
       .catch((error) => console.error(error));
   }, []);
 
-  function saveGoal1(event) {
+  async function saveGoal(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const goal = new Goal({
+    const newGoal = new Goal({
       title: formData.get('goal-title').trim(),
       progress: 0,
       target: Number(formData.get('goal-amount')),
       finishDate: formData.get('goal-date') || null,
     });
-    const updatedGoals = [...goals, goal];
 
-    localStorage.setItem(GOALS_STORAGE_KEY, JSON.stringify(updatedGoals));
-    setGoals(updatedGoals);
-    setTitle('');
-    setTarget('');
-    event.currentTarget.reset();
+    await fetch('/api/goal', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newGoal),
+    });
   }
 
   return (
