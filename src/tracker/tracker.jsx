@@ -16,40 +16,24 @@ export function Tracker() {
       .catch((error) => console.error(error));
   }, []);
 
-  function addReading() {
+  async function addReading() {
     if (!canAddReading) return;
+    const goal = goals.find((savedGoal) => savedGoal.id === selectedGoal);
+    if (!goal) return;
 
     try {
-      const savedGoals = JSON.parse(localStorage.getItem('goals') || '[]');
-      if (!Array.isArray(savedGoals)) return;
-
-      const selectedGoalIndex = savedGoals.findIndex((goal) => goal.title === selectedGoal);
-      if (selectedGoalIndex === -1) return;
-
-      const goal = savedGoals[selectedGoalIndex];
-      const updatedProgress = (Number(goal.progress) || 0) + Number(readingAmount);
-      const isComplete = updatedProgress >= Number(goal.target);
-      const updatedGoals = isComplete
-        ? savedGoals.filter((_, index) => index !== selectedGoalIndex)
-        : savedGoals.map((goal, index) => (
-          index === selectedGoalIndex ? { ...goal, progress: updatedProgress } : goal
-        ));
-
-      if (isComplete) {
-        const savedRewards = JSON.parse(localStorage.getItem('rewards') || '[]');
-        if (Array.isArray(savedRewards)) {
-          const updatedRewards = savedRewards.map((reward) => (
-            reward.goal === goal.title ? { ...reward, status: 'unlocked' } : reward
-          ));
-          localStorage.setItem('rewards', JSON.stringify(updatedRewards));
-        }
-      }
-
-      localStorage.setItem('goals', JSON.stringify(updatedGoals));
+      const response = await fetch(`/api/goal/${encodeURIComponent(goal.id)}`, {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ progress: (Number(goal.progress) || 0) + Number(readingAmount) }),
+      });
+      if (!response.ok) throw new Error(`Could not update goal: ${response.status}`);
+      const updatedGoals = await response.json();
+      setGoals(Array.isArray(updatedGoals) ? updatedGoals : []);
       setSelectedGoal('');
       setReadingAmount('');
-    } catch {
-      // Leave the form values intact if saved goals cannot be updated.
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -74,9 +58,8 @@ export function Tracker() {
                       : <>
                           <option value="">Select a goal</option>
                           {goals
-                            .map((goal) => goal.title)
-                            .filter((title) => typeof title === 'string' && title.trim())
-                            .map((title, index) => <option key={`${title}-${index}`} value={title}>{title}</option>)}
+                            .filter((goal) => typeof goal.title === 'string' && goal.title.trim())
+                            .map((goal) => <option key={goal.id} value={goal.id}>{goal.title}</option>)}
                         </>}
                   </select>
                 </div>

@@ -81,8 +81,25 @@ apiRouter.get('/goals', verifyAuth, (req, res) => {
 
 // SubmitGoal
 apiRouter.post('/goal', verifyAuth, (req, res) => {
-  const goal = { ...req.body, username: req.user.email };
+  const goal = { ...req.body, id: req.body.id || uuid.v4(), username: req.user.email };
   goals = updateGoals(goal);
+  res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
+});
+
+// UpdateGoal updates progress for one of the authenticated user's goals.
+apiRouter.put('/goal/:id', verifyAuth, (req, res) => {
+  const goal = goals.find((savedGoal) => savedGoal.id === req.params.id && savedGoal.username === req.user.email);
+  const progress = Number(req.body.progress);
+  if (!goal) return res.status(404).send({ msg: 'Goal not found' });
+  if (!Number.isFinite(progress) || progress < 0) return res.status(400).send({ msg: 'Invalid progress' });
+
+  goal.progress = progress;
+  if (goal.progress >= Number(goal.target)) {
+    rewards = rewards.map((reward) => (
+      reward.goal === goal.id && reward.username === req.user.email ? { ...reward, status: 'unlocked' } : reward
+    ));
+    goals = goals.filter((savedGoal) => savedGoal.id !== goal.id);
+  }
   res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
 });
 
