@@ -6,9 +6,10 @@ const app = express();
 
 const authCookieName = 'token';
 
-// The users are saved in memory and disappear whenever the service is restarted.
+// The users, goals, and rewards are saved in memory and disappear whenever the service is restarted.
 let users = [];
 let goals = [];
+let rewards = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -85,6 +86,18 @@ apiRouter.post('/goal', verifyAuth, (req, res) => {
   res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
 });
 
+// GetRewards
+apiRouter.get('/rewards', verifyAuth, (req, res) => {
+  res.send(rewards.filter((reward) => reward.username === req.user.email));
+});
+
+// SubmitReward
+apiRouter.post('/reward', verifyAuth, (req, res) => {
+  const reward = { ...req.body, username: req.user.email };
+  rewards = updateRewards(reward);
+  res.send(rewards.filter((savedReward) => savedReward.username === req.user.email));
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
@@ -99,6 +112,12 @@ app.use((_req, res) => {
 function updateGoals(newGoal) {
   goals.push(newGoal);
   return goals;
+}
+
+// updateRewards adds a new reward to rewards.
+function updateRewards(newReward) {
+  rewards.push(newReward);
+  return rewards;
 }
 
 async function createUser(email, password) {
