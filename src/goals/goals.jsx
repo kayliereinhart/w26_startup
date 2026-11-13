@@ -7,14 +7,21 @@ export function Goals() {
   const [title, setTitle] = useState('');
   const [target, setTarget] = useState('');
 
-  React.useEffect(() => {
-    fetch('/api/goals')
+  async function loadGoals() {
+    return fetch('/api/goals')
       .then((response) => {
         if (!response.ok) throw new Error(`Could not load goals: ${response.status}`);
         return response.json();
       })
       .then((data) => setGoals(data.map((goal) => new Goal(goal))))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  }
+
+  React.useEffect(() => {
+    loadGoals().catch(() => {});
   }, []);
 
   async function saveGoal(event) {
@@ -27,11 +34,13 @@ export function Goals() {
       finishDate: formData.get('goal-date') || null,
     });
 
-    await fetch('/api/goal', {
+    const response = await fetch('/api/goal', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newGoal),
     });
+    if (!response.ok) throw new Error(`Could not save goal: ${response.status}`);
+    await loadGoals();
   }
 
   return (
