@@ -71,6 +71,12 @@ async function addReward(reward) {
   return rewardCollection.insertOne(reward);
 }
 
+async function deleteReward(id, username) {
+  if (!ObjectId.isValid(id)) return false;
+  const result = await rewardCollection.deleteOne({ _id: new ObjectId(id), username });
+  return result.deletedCount === 1;
+}
+
 function getUserRewards(user) {
   const query = { username: user.email };
   const options = {};
@@ -89,4 +95,5 @@ module.exports = {
   updateGoal,
   addReward,
   getUserRewards,
+  deleteReward,
 };

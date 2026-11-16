@@ -1,6 +1,5 @@
 export class Reward {
-  constructor({ id = globalThis.crypto.randomUUID(), goal, description = '', status = 'locked', username }) {
-    this.id = id;
+  constructor({ goal, description = '', status = 'locked', username }) {
     this.goal = goal;
     this.description = description;
     this.status = status;

@@ -64,7 +64,7 @@ export function Rewards({username}) {
     });
     if (!response.ok) throw new Error(`Could not delete reward: ${response.status}`);
 
-    setRewards((currentRewards) => currentRewards.filter((reward) => reward.id !== rewardId));
+    setRewards((currentRewards) => currentRewards.filter((reward) => reward._id !== rewardId));
   }
 
   return (
@@ -118,7 +118,7 @@ export function Rewards({username}) {
                     const unlocked = reward.status === 'unlocked';
                     const goalTitle = goals.find((goal) => goal._id === reward.goal)?.title || 'your reading goal';
                     return (
-                      <article className="col-md-6" key={reward.id}>
+                      <article className="col-md-6" key={reward._id}>
                         <div className={`reward-item${unlocked ? ' reward-unlocked' : ''} rounded-4 p-4 h-100`}>
                           <div className="d-flex justify-content-between align-items-start gap-3 mb-2">
                           <h3 className="h5 fw-bold mb-0">{reward.description}</h3>
@@ -128,7 +128,7 @@ export function Rewards({username}) {
                           </div>
                           <p className="mb-0">{unlocked ? `Earned for completing “${goalTitle}.”` : `Unlock by completing “${goalTitle}.”`}</p>
                           {unlocked && (
-                            <button className="btn btn-forest mt-3" type="button" onClick={() => markRewardEnjoyed(reward.id)}>
+                            <button className="btn btn-forest mt-3" type="button" onClick={() => markRewardEnjoyed(reward._id)}>
                               Mark as enjoyed
                             </button>
                           )}

@@ -119,13 +119,9 @@ apiRouter.post('/reward', verifyAuth, async (req, res) => {
 });
 
 // DeleteReward removes an authenticated user's reward after it is enjoyed.
-apiRouter.delete('/reward/:id', verifyAuth, (req, res) => {
-  const reward = rewards.find((savedReward) => (
-    savedReward.id === req.params.id && savedReward.username === req.user.email
-  ));
-  if (!reward) return res.status(404).send({ msg: 'Reward not found' });
-
-  rewards = rewards.filter((savedReward) => savedReward !== reward);
+apiRouter.delete('/reward/:id', verifyAuth, async (req, res) => {
+  const deleted = await DB.deleteReward(req.params.id, req.user.email);
+  if (!deleted) return res.status(404).send({ msg: 'Reward not found' });
   res.status(204).end();
 });
 
