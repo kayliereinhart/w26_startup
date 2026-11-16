@@ -7,9 +7,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-// Rewards are saved in memory and disappear whenever the service is restarted.
-let rewards = [];
-
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -96,11 +93,7 @@ apiRouter.put('/goal/:id', verifyAuth, async (req, res) => {
 
   if (goal.completed) {
     const goalId = goal._id.toString();
-    rewards = rewards.map((reward) => (
-      reward.goal === goalId && reward.username === req.user.email
-        ? { ...reward, status: 'unlocked' }
-        : reward
-    ));
+    await DB.unlockRewards(goalId, req.user.email);
   }
 
   res.send(await DB.getUserGoals(req.user));

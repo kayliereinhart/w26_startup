@@ -71,6 +71,14 @@ async function addReward(reward) {
   return rewardCollection.insertOne(reward);
 }
 
+async function unlockRewards(goalId, username) {
+  const result = await rewardCollection.updateMany(
+    { goal: goalId, username },
+    { $set: { status: 'unlocked' } },
+  );
+  return result.modifiedCount;
+}
+
 async function deleteReward(id, username) {
   if (!ObjectId.isValid(id)) return false;
   const result = await rewardCollection.deleteOne({ _id: new ObjectId(id), username });
@@ -94,6 +102,7 @@ module.exports = {
   getUserGoals,
   updateGoal,
   addReward,
+  unlockRewards,
   getUserRewards,
   deleteReward,
 };
