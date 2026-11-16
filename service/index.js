@@ -68,6 +68,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 const verifyAuth = async (req, res, next) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
+    req.user = user;
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -75,15 +76,16 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetGoals
-apiRouter.get('/goals', verifyAuth, (req, res) => {
-  res.send(goals.filter((goal) => goal.username === req.user.email));
+apiRouter.get('/goals', verifyAuth, async (req, res) => {
+  const goals = await DB.getUserGoals(req.user);
+  res.send(goals);
 });
 
 // SubmitGoal
-apiRouter.post('/goal', verifyAuth, (req, res) => {
+apiRouter.post('/goal', verifyAuth, async (req, res) => {
   const goal = { ...req.body, id: req.body.id || uuid.v4(), username: req.user.email };
-  goals = updateGoals(goal);
-  res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
+  goals = updateGoals(goal, req.user);
+  res.send(goals);
 });
 
 // UpdateGoal updates progress for one of the authenticated user's goals.
@@ -137,9 +139,9 @@ app.use((_req, res) => {
 });
 
 // updateGoals adds a new goal to goals.
-function updateGoals(newGoal) {
-  goals.push(newGoal);
-  return goals;
+async function updateGoals(newGoal, user) {
+  await DB.addGoal(newGoal);
+  return DB.getUserGoals(user);
 }
 
 // updateRewards adds a new reward to rewards.

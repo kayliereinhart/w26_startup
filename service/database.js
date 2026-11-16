@@ -43,10 +43,19 @@ async function addGoal(goal) {
   return goalCollection.insertOne(goal);
 }
 
+function getUserGoals(user) {
+  const query = { username: user.email };
+  const options = {};
+  const cursor = goalCollection.find(query, options);
+  return cursor.toArray();
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   addUser,
   updateUser,
   updateUserRemoveAuth,
+  addGoal,
+  getUserGoals,
 };
