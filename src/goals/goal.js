@@ -1,6 +1,5 @@
 export class Goal {
-  constructor({ id = globalThis.crypto.randomUUID(), title, progress, target, finishDate, username }) {
-    this.id = id;
+  constructor({ title, progress, target, finishDate, username }) {
     this.title = title;
     this.progress = progress;
     this.target = target;

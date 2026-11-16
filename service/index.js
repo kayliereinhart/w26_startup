@@ -83,8 +83,7 @@ apiRouter.get('/goals', verifyAuth, async (req, res) => {
 
 // SubmitGoal
 apiRouter.post('/goal', verifyAuth, async (req, res) => {
-  const goal = { ...req.body, id: req.body.id || uuid.v4(), username: req.user.email };
-  goals = updateGoals(goal, req.user);
+  const goals = await updateGoals(req.body, req.user);
   res.send(goals);
 });
 

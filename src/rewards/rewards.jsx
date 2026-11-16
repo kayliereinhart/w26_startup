@@ -38,9 +38,9 @@ export function Rewards({username}) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const selectedGoalRecord = goals.find((goal) => goal.id === formData.get('reward-goal'));
+    const selectedGoalRecord = goals.find((goal) => goal._id === formData.get('reward-goal'));
     const reward = new Reward({
-      goal: selectedGoalRecord?.id || '',
+      goal: selectedGoalRecord?._id || '',
       description: formData.get('reward-description').trim(),
       username: username,
     });
@@ -95,7 +95,7 @@ export function Rewards({username}) {
                   <label htmlFor="reward-goal" className="form-label fw-semibold">Unlock when</label>
                   <select className="form-select" id="reward-goal" name="reward-goal" required disabled={goals.length === 0} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)}>
                     <option value="" disabled>Select a goal</option>
-                    {goals.map((goal) => <option value={goal.id} key={goal.id}>{goal.title}</option>)}
+                    {goals.map((goal) => <option value={goal._id} key={goal._id}>{goal.title}</option>)}
                   </select>
                 </div>
                 <div className="col-12">
@@ -116,7 +116,7 @@ export function Rewards({username}) {
                   ? <p className="mb-0">No rewards yet.</p>
                   : rewards.map((reward) => {
                     const unlocked = reward.status === 'unlocked';
-                    const goalTitle = goals.find((goal) => goal.id === reward.goal)?.title || 'your reading goal';
+                    const goalTitle = goals.find((goal) => goal._id === reward.goal)?.title || 'your reading goal';
                     return (
                       <article className="col-md-6" key={reward.id}>
                         <div className={`reward-item${unlocked ? ' reward-unlocked' : ''} rounded-4 p-4 h-100`}>

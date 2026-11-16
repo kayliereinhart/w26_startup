@@ -18,11 +18,11 @@ export function Tracker() {
 
   async function addReading() {
     if (!canAddReading) return;
-    const goal = goals.find((savedGoal) => savedGoal.id === selectedGoal);
+    const goal = goals.find((savedGoal) => savedGoal._id === selectedGoal);
     if (!goal) return;
 
     try {
-      const response = await fetch(`/api/goal/${encodeURIComponent(goal.id)}`, {
+      const response = await fetch(`/api/goal/${encodeURIComponent(goal._id)}`, {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ progress: (Number(goal.progress) || 0) + Number(readingAmount) }),
@@ -59,7 +59,7 @@ export function Tracker() {
                           <option value="">Select a goal</option>
                           {goals
                             .filter((goal) => typeof goal.title === 'string' && goal.title.trim())
-                            .map((goal) => <option key={goal.id} value={goal.id}>{goal.title}</option>)}
+                            .map((goal) => <option key={goal._id} value={goal._id}>{goal.title}</option>)}
                         </>}
                   </select>
                 </div>

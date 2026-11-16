@@ -61,7 +61,7 @@ export function Goals({ userName }) {
                   <tbody>
                     {goals.length === 0
                       ? <tr><td colSpan="4">No goals</td></tr>
-                      : goals.map((goal) => <GoalRow goal={goal} key={goal.id} />)}
+                      : goals.map((goal) => <GoalRow goal={goal} key={goal._id} />)}
                   </tbody>
                 </table>
               </div>
