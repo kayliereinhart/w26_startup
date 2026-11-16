@@ -166,7 +166,7 @@ async function findUser(field, value) {
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: false, //TO-DO: change to true before deploying to production
+    secure: true, //TO-DO: change to true before deploying to production
     httpOnly: true,
     sameSite: 'strict',
   });
