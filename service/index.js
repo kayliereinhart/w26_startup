@@ -7,8 +7,7 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-// The goals and rewards are saved in memory and disappear whenever the service is restarted.
-let goals = [];
+// Rewards are saved in memory and disappear whenever the service is restarted.
 let rewards = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
@@ -88,20 +87,14 @@ apiRouter.post('/goal', verifyAuth, async (req, res) => {
 });
 
 // UpdateGoal updates progress for one of the authenticated user's goals.
-apiRouter.put('/goal/:id', verifyAuth, (req, res) => {
-  const goal = goals.find((savedGoal) => savedGoal.id === req.params.id && savedGoal.username === req.user.email);
+apiRouter.put('/goal/:id', verifyAuth, async (req, res) => {
   const progress = Number(req.body.progress);
-  if (!goal) return res.status(404).send({ msg: 'Goal not found' });
   if (!Number.isFinite(progress) || progress < 0) return res.status(400).send({ msg: 'Invalid progress' });
 
-  goal.progress = progress;
-  if (goal.progress >= Number(goal.target)) {
-    rewards = rewards.map((reward) => (
-      reward.goal === goal.id && reward.username === req.user.email ? { ...reward, status: 'unlocked' } : reward
-    ));
-    goals = goals.filter((savedGoal) => savedGoal.id !== goal.id);
-  }
-  res.send(goals.filter((savedGoal) => savedGoal.username === req.user.email));
+  const goal = await DB.updateGoal(req.params.id, req.user.email, progress);
+  if (!goal) return res.status(404).send({ msg: 'Goal not found' });
+
+  res.send(await DB.getUserGoals(req.user));
 });
 
 // GetRewards

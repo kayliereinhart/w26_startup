@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -50,6 +50,17 @@ function getUserGoals(user) {
   return cursor.toArray();
 }
 
+async function updateGoal(id, username, value) {
+  if (!ObjectId.isValid(id)) return null;
+
+  const result = await goalCollection.findOneAndUpdate(
+    { _id: new ObjectId(id), username },
+    { $set: { progress: value } },
+    { returnDocument: 'after' },
+  );
+  return result;
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -58,4 +69,5 @@ module.exports = {
   updateUserRemoveAuth,
   addGoal,
   getUserGoals,
+  updateGoal,
 };
