@@ -58,6 +58,12 @@ async function updateGoal(id, username, value) {
     { $set: { progress: value } },
     { returnDocument: 'after' },
   );
+
+  if (result && value >= Number(result.target)) {
+    await goalCollection.deleteOne({ _id: result._id, username });
+    result.completed = true;
+  }
+
   return result;
 }
 

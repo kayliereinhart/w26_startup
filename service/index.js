@@ -94,6 +94,15 @@ apiRouter.put('/goal/:id', verifyAuth, async (req, res) => {
   const goal = await DB.updateGoal(req.params.id, req.user.email, progress);
   if (!goal) return res.status(404).send({ msg: 'Goal not found' });
 
+  if (goal.completed) {
+    const goalId = goal._id.toString();
+    rewards = rewards.map((reward) => (
+      reward.goal === goalId && reward.username === req.user.email
+        ? { ...reward, status: 'unlocked' }
+        : reward
+    ));
+  }
+
   res.send(await DB.getUserGoals(req.user));
 });
 
