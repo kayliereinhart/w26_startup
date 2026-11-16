@@ -1,7 +1,8 @@
 export class Reward {
-  constructor({ _id, goal, description = '', status = 'locked', username }) {
+  constructor({ _id, goalId, goalTitle = '', description = '', status = 'locked', username }) {
     this._id = _id;
-    this.goal = goal;
+    this.goalId = goalId;
+    this.goalTitle = goalTitle;
     this.description = description;
     this.status = status;
     this.username = username;

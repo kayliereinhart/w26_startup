@@ -40,7 +40,8 @@ export function Rewards({username}) {
     const formData = new FormData(form);
     const selectedGoalRecord = goals.find((goal) => goal._id === formData.get('reward-goal'));
     const reward = new Reward({
-      goal: selectedGoalRecord?._id || '',
+      goalId: selectedGoalRecord?._id || '',
+      goalTitle: selectedGoalRecord?.title || '',
       description: formData.get('reward-description').trim(),
       username: username,
     });
@@ -116,7 +117,7 @@ export function Rewards({username}) {
                   ? <p className="mb-0">No rewards yet.</p>
                   : rewards.map((reward) => {
                     const unlocked = reward.status === 'unlocked';
-                    const goalTitle = goals.find((goal) => goal._id === reward.goal)?.title || 'your reading goal';
+                    const goalTitle = reward.goalTitle || 'your reading goal';
                     return (
                       <article className="col-md-6" key={reward._id}>
                         <div className={`reward-item${unlocked ? ' reward-unlocked' : ''} rounded-4 p-4 h-100`}>

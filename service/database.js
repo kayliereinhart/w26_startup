@@ -73,7 +73,7 @@ async function addReward(reward) {
 
 async function unlockRewards(goalId, username) {
   const result = await rewardCollection.updateMany(
-    { goal: goalId, username },
+    { goalId, username },
     { $set: { status: 'unlocked' } },
   );
   return result.modifiedCount;
