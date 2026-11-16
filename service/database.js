@@ -67,6 +67,17 @@ async function updateGoal(id, username, value) {
   return result;
 }
 
+async function addReward(reward) {
+  return rewardCollection.insertOne(reward);
+}
+
+function getUserRewards(user) {
+  const query = { username: user.email };
+  const options = {};
+  const cursor = rewardCollection.find(query, options);
+  return cursor.toArray();
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -76,4 +87,6 @@ module.exports = {
   addGoal,
   getUserGoals,
   updateGoal,
+  addReward,
+  getUserRewards,
 };

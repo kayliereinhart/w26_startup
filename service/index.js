@@ -107,15 +107,15 @@ apiRouter.put('/goal/:id', verifyAuth, async (req, res) => {
 });
 
 // GetRewards
-apiRouter.get('/rewards', verifyAuth, (req, res) => {
-  res.send(rewards.filter((reward) => reward.username === req.user.email));
+apiRouter.get('/rewards', verifyAuth, async (req, res) => {
+  const rewards = await DB.getUserRewards(req.user);
+  res.send(rewards);
 });
 
 // SubmitReward
-apiRouter.post('/reward', verifyAuth, (req, res) => {
-  const reward = { ...req.body, id: req.body.id || uuid.v4(), username: req.user.email };
-  rewards = updateRewards(reward);
-  res.send(rewards.filter((savedReward) => savedReward.username === req.user.email));
+apiRouter.post('/reward', verifyAuth, async (req, res) => {
+  const rewards = await updateRewards(req.body, req.user);
+  res.send(rewards);
 });
 
 // DeleteReward removes an authenticated user's reward after it is enjoyed.
@@ -141,14 +141,14 @@ app.use((_req, res) => {
 
 // updateGoals adds a new goal to goals.
 async function updateGoals(newGoal, user) {
-  await DB.addGoal(newGoal);
+  await DB.addGoal({ ...newGoal, username: user.email });
   return DB.getUserGoals(user);
 }
 
 // updateRewards adds a new reward to rewards.
-function updateRewards(newReward) {
-  rewards.push(newReward);
-  return rewards;
+async function updateRewards(newReward, user) {
+  await DB.addReward({ ...newReward, username: user.email });
+  return DB.getUserRewards(user);
 }
 
 async function createUser(email, password) {
